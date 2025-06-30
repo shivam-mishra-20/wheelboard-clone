@@ -1,41 +1,139 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { FaQuoteLeft } from "react-icons/fa";
 
-const MissionVision = () => {
-  return (
-    <section className="py-16 bg-blue-600 text-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-blue-700 p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-            <p className="mb-4">
-              To revolutionize mobility through innovative wheel technology that
-              enhances performance, reliability, and sustainability across all
-              transportation sectors.
+const MissionVisionSection = () => (
+  <section
+    id="mission-vision"
+    className="relative bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+  >
+    {/* Title */}
+    <div className="relative z-10 text-center mb-16">
+      <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+        Our <span className="text-blue-400">Mission</span> and{" "}
+        <span className="text-blue-600">Vision</span>
+      </h2>
+      <p className="mt-2 text-gray-600 text-sm sm:text-base">
+        Guided by clear principles to transform the transport industry.
+      </p>
+    </div>
+
+    <div className="relative z-10 space-y-16 max-w-4xl mx-auto">
+      {/* Mission Card */}
+      <motion.div
+        className="relative mr-40"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Foreground card */}
+        <div
+          className="relative bg-white rounded-2xl shadow-2xl p-6 sm:p-10 flex flex-col md:flex-row items-center hover:bg-white/50 backdrop-blur-sm transition-all"
+          style={{
+            minHeight: 320, // Reduced height
+            height: 280, // Reduced height
+            maxWidth: 760,
+            width: "100%",
+            margin: "0 auto",
+            alignItems: "center",
+          }}
+        >
+          {/* Text */}
+          <div className="md:w-1/2 text-left flex-1 z-10">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+              Our Mission
+            </h3>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+              To promote sustainable practices and efficient transport
+              operations that deliver exceptional value to our Clients while
+              making a meaningful, positive impact on Society. We are committed
+              to advancing eco-friendly logistics solutions that support both
+              business success and social responsibility.
             </p>
-            <p>
-              We are committed to developing solutions that not only meet
-              current industry standards but set new benchmarks for quality and
-              efficiency.
-            </p>
+            <motion.div
+              className="absolute bottom-[-2] left-8 text-gray-200 text-6xl sm:text-7xl"
+              animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            >
+              <FaQuoteLeft />
+            </motion.div>
           </div>
 
-          <div className="bg-blue-700 p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-            <p className="mb-4">
-              To be the global leader in wheel technology, recognized for our
-              innovation, quality, and contribution to a more sustainable and
-              mobile world.
-            </p>
-            <p>
-              We envision a future where our products are the preferred choice
-              for mobility solutions across diverse industries and applications
-              worldwide.
-            </p>
+          {/* Van image */}
+          <div className="md:w-1/2 relative flex-1 flex justify-end items-end min-w-[220px]">
+            <img
+              src="/VAN 1.png"
+              alt="Mission Van"
+              className="absolute right-[-200px] bottom-[-110px] w-80 sm:w-[480px] md:w-[560px] lg:w-[600px] transform -scale-x-100 drop-shadow-xl pointer-events-none select-none"
+              style={{
+                maxWidth: "150%",
+                height: "auto",
+                zIndex: 20,
+              }}
+            />
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
+      </motion.div>
 
-export default MissionVision;
+      {/* Vision Card */}
+      <motion.div
+        className="relative ml-40"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        {/* Removed extra shadow background layer */}
+        {/* Foreground card */}
+        <div
+          className="relative bg-white rounded-2xl shadow-2xl p-6 sm:p-10 flex flex-col md:flex-row-reverse items-center hover:bg-white/50 backdrop-blur-sm transition-all"
+          style={{
+            minHeight: 320, // Reduced height
+            height: 240, // Reduced height
+            maxWidth: 760,
+            width: "100%",
+            margin: "0 auto",
+            alignItems: "center",
+          }}
+        >
+          {/* Text */}
+          <div className="md:w-1/2 text-left md:text-right flex-1 z-10">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+              Our Vision
+            </h3>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+              To become a key driving force in transforming the transport
+              industry into a Safer, Efficient, and Sustainable ecosystem, where
+              every stakeholder thrives through Innovation and Collaborative
+              partnerships, building a better future.
+            </p>
+            <motion.div
+              className="absolute bottom-[-2] right-8 text-gray-200 text-6xl sm:text-7xl rotate-180"
+              animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            >
+              <FaQuoteLeft />
+            </motion.div>
+          </div>
+
+          {/* Van image */}
+          <div className="md:w-1/2 relative flex-1 flex justify-start items-end min-w-[220px]">
+            <img
+              src="/VAN 1.png"
+              alt="Vision Van"
+              className="absolute left-[-200px] bottom-[-110px] w-80 sm:w-[480px] md:w-[560px] lg:w-[600px] transform drop-shadow-xl pointer-events-none select-none"
+              style={{
+                maxWidth: "150%",
+                height: "auto",
+                zIndex: 20,
+              }}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+export default MissionVisionSection;

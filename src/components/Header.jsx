@@ -24,13 +24,31 @@ const Header = () => {
         setScrollDirection("up");
       }
       lastScrollY = window.scrollY;
+
+      // Hide mobile menu on scroll
+      if (isOpen) setIsOpen(false);
+
+      // --- Active link highlight based on scroll ---
+      // Get all section elements by id
+      let currentSection = "home";
+      for (const link of navLinks) {
+        const section = document.getElementById(link.id);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 80 && rect.bottom > 80) {
+            currentSection = link.id;
+            break;
+          }
+        }
+      }
+      setActiveLink(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isOpen]); // Make sure navLinks is in scope
 
   // Navigation links data
   const navLinks = [
@@ -78,74 +96,90 @@ const Header = () => {
     </nav>
   );
 
-  // Render mobile navigation
+  // --- Updated Mobile Nav ---
   const renderMobileNav = () => (
-    <div className="md:hidden">
+    <div className="md:hidden flex items-center">
+      {/* Hamburger Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-purple-900 hover:text-purple-700 focus:outline-none"
+        className="text-purple-900 hover:text-purple-700 focus:outline-none transition-transform duration-300"
         aria-label="Toggle menu"
       >
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        <motion.div
+          initial={false}
+          animate={isOpen ? { rotate: 90 } : { rotate: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
-          {isOpen ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          )}
-        </svg>
+          <svg
+            className="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {isOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </motion.div>
       </button>
 
-      {isOpen && (
-        <motion.div
-          className="absolute top-full left-0 right-0 bg-white rounded-b-2xl shadow-lg mt-2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <nav className="flex flex-col space-y-1 px-6 py-4">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.id}
-                href={`#${link.id}`}
-                className={`py-3 px-4 rounded-lg font-medium ${
-                  activeLink === link.id
-                    ? "text-purple-900 bg-purple-50"
-                    : "text-gray-700 hover:text-purple-900 hover:bg-purple-50"
-                } transition-colors duration-300`}
-                onClick={() => {
-                  setActiveLink(link.id);
-                  setIsOpen(false);
-                }}
-                whileHover={{ x: 5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+      {/* Animated Slide Menu */}
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={
+          isOpen
+            ? { height: "auto", opacity: 1 }
+            : { height: 0, opacity: 0, transition: { delay: 0.1 } }
+        }
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`absolute top-full left-0 right-0 bg-[#F4E1F9] rounded-b-2xl shadow-xl overflow-hidden mt-2 z-40 ${
+          isOpen ? "py-4 px-6" : "p-0"
+        }`}
+      >
+        <nav className="flex flex-col space-y-2">
+          {navLinks.map((link) => (
             <motion.a
-              href="#contact"
-              className="bg-purple-700 text-white mt-2 px-6 py-3 rounded-lg font-semibold hover:bg-purple-800 transition duration-300 flex items-center justify-center"
-              onClick={() => setIsOpen(false)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.95 }}
+              key={link.id}
+              href={`#${link.id}`}
+              className={`block py-3 px-4 rounded-lg text-base font-medium transition-colors ${
+                activeLink === link.id
+                  ? "text-purple-900 bg-purple-50"
+                  : "text-gray-700 hover:text-purple-900 hover:bg-purple-50"
+              }`}
+              onClick={() => {
+                setActiveLink(link.id);
+                setIsOpen(false);
+              }}
+              whileHover={{ x: 4 }}
+              whileTap={{ scale: 0.96 }}
             >
+              {link.label}
+            </motion.a>
+          ))}
+
+          {/* Contact Button */}
+          <motion.a
+            href="#contact"
+            className="mt-4 py-3 px-6 bg-purple-700 text-white rounded-lg font-semibold text-center transition hover:bg-purple-800"
+            onClick={() => setIsOpen(false)}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <div className="flex justify-center items-center gap-2">
               <svg
-                className="w-4 h-4 mr-2"
+                className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -158,10 +192,10 @@ const Header = () => {
                 />
               </svg>
               Contact Us
-            </motion.a>
-          </nav>
-        </motion.div>
-      )}
+            </div>
+          </motion.a>
+        </nav>
+      </motion.div>
     </div>
   );
 
