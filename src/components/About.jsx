@@ -3,77 +3,59 @@ import { motion } from "framer-motion";
 
 const aboutData = [
   {
-    img: "/img-3.png",
-    bg: "from-blue-500 to-blue-700",
-    dot: "bg-orange-400",
+    img: "https://media.istockphoto.com/id/517416991/photo/truck-driver.jpg?s=612x612&w=0&k=20&c=e1sbLN1Xof1cibXNfRWwQGBk0Ji0FIUaXRFrtUZ7Nho=", // Driver in truck cab
+    bgColor: "from-blue-500 to-blue-600",
+    dotColor: "bg-blue-400",
+    dotPosition: "top-4 right-4",
   },
   {
-    img: "img.png",
-    bg: "from-orange-400 to-pink-500",
-    dot: "bg-blue-400",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80", // Analytics dashboard
+    bgColor: "from-orange-400 to-orange-500",
+    dotColor: "bg-blue-400",
+    dotPosition: "top-4 left-4",
   },
   {
-    img: "img-5.png",
-    bg: "from-yellow-400 to-blue-600",
-    dot: "bg-orange-400",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqXW-_g3LE3jWjvvOnQPKEsRlOQFEEwOY44w&s", // Mechanic working on truck tire
+    bgColor: "from-blue-500 to-blue-600",
+    dotColor: "bg-orange-400",
+    dotPosition: "top-4 right-4",
   },
   {
-    img: "img-1.png",
-    bg: "from-green-400 to-green-600",
-    dot: "bg-green-400",
+    img: "https://media.istockphoto.com/id/184278815/photo/trucking-discussion.jpg?s=612x612&w=0&k=20&c=8HZvjBGVcz8uwwFMFLCB2o9X0aZ9IrnfaYyHdGCzFz8=", // Consultation
+    bgColor: "from-green-500 to-green-600",
+    dotColor: "bg-green-400",
+    dotPosition: "top-4 left-4",
   },
   {
-    img: "img-4.png",
-    bg: "from-orange-400 to-pink-500",
-    dot: "bg-sky-300",
+    img: "https://png.pngtree.com/png-vector/20240129/ourmid/pngtree-car-wheel-and-tire-with-service-tools-service-accessories-with-spanner-png-image_11567931.png", // Tires and tools
+    bgColor: "from-orange-400 to-orange-500",
+    dotColor: "bg-orange-400",
+    dotPosition: "top-4 right-4",
   },
   {
-    img: "img-2.png",
-    bg: "from-purple-500 to-pink-500",
-    dot: "bg-purple-400",
+    img: "https://media.istockphoto.com/id/545806984/photo/checking-the-manifest-one-last-time.jpg?s=612x612&w=0&k=20&c=D6dW8cnbxO86z8xQ1EdJ8QPPuVjq1cP2j3XowI2lwZ4=", // People discussing by trucks
+    bgColor: "from-purple-500 to-purple-600",
+    dotColor: "bg-purple-400",
+    dotPosition: "top-4 left-4",
   },
-];
-
-const cardRotations = [
-  "-rotate-6",
-  "rotate-6",
-  "-rotate-3",
-  "rotate-3",
-  "-rotate-2",
-  "rotate-2",
-];
-const dotPositions = [
-  "-top-5 -left-5",
-  "-top-5 -right-5",
-  "-bottom-5 -left-5",
-  "-bottom-5 -right-5",
-  "-top-5 -left-5",
-  "-top-5 -right-5",
 ];
 
 const cardVariants = {
   offscreen: {
     opacity: 0,
-    y: 80,
-    scale: 0.85,
-    rotate: -8,
-    filter: "blur(8px)",
-    boxShadow: "0 0px 0px rgba(0,0,0,0.0)",
+    y: 20,
+    rotate: -2,
+    scale: 0.98,
   },
   onscreen: {
     opacity: 1,
     y: 0,
-    scale: 1,
     rotate: 0,
-    filter: "blur(0px)",
-    boxShadow: "0 16px 40px rgba(0,0,0,0.18)",
+    scale: 1,
     transition: {
       type: "spring",
-      bounce: 0.38,
-      duration: 1.05,
-      delayChildren: 0.15,
-      staggerChildren: 0.09,
-      ease: [0.22, 1, 0.36, 1],
+      bounce: 0.3,
+      duration: 0.8,
     },
   },
 };
@@ -84,32 +66,20 @@ const About = () => {
       id="about"
       className="relative py-20 bg-white overflow-hidden min-h-screen flex items-center justify-center"
     >
-      <div className="w-full">
-        {/* Soft colored background circles and extra effects */}
-        <div className="absolute z-0 inset-0 pointer-events-none">
-          <div className="absolute w-72 h-72 bg-blue-100 rounded-full -top-20 -left-20 opacity-60 blur-2xl"></div>
-          <div className="absolute w-80 h-80 bg-orange-100 rounded-full top-1/3 -right-32 opacity-50 blur-2xl"></div>
-          <div className="absolute w-72 h-72 bg-green-100 rounded-full bottom-0 left-1/4 opacity-40 blur-2xl"></div>
-          <div className="absolute w-80 h-80 bg-purple-100 rounded-full -bottom-24 right-1/4 opacity-40 blur-2xl"></div>
-          {/* Extra animated gradient blobs */}
-          <motion.div
-            className="absolute w-60 h-60 bg-gradient-to-tr from-pink-300 to-purple-300 rounded-full left-1/2 top-10 opacity-30 blur-3xl"
-            animate={{ scale: [1, 1.15, 1], rotate: [0, 15, 0] }}
-            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute w-44 h-44 bg-gradient-to-br from-blue-200 to-sky-300 rounded-full right-1/3 bottom-10 opacity-25 blur-2xl"
-            animate={{ scale: [1, 1.1, 1], rotate: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
-          />
+      <div className="w-full max-w-7xl mx-auto px-4">
+        {/* Soft gradient background blobs */}
+        <div className="absolute z-0 inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute w-[700px] h-[700px] rounded-full -top-20 -left-20 bg-blue-50/60 blur-3xl"></div>
+          <div className="absolute w-[800px] h-[800px] rounded-full -bottom-40 -right-40 bg-green-50/60 blur-3xl"></div>
+          <div className="absolute w-[700px] h-[700px] rounded-full top-1/2 left-1/3 bg-purple-50/50 blur-3xl"></div>
         </div>
 
         {/* Heading */}
-        <div className="relative z-10 max-w-3xl mx-auto text-center mb-16 px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <div className="relative z-10 max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             About <span className="text-blue-600">Us</span>
           </h2>
-          <p className="text-gray-700 font-medium mt-4 leading-relaxed">
+          <p className="text-gray-700 font-medium leading-relaxed">
             At <strong>Wheelboard</strong>, We are committed to transform the
             transport industry by{" "}
             <strong>"Promoting sustainable practices"</strong> Ensuring{" "}
@@ -122,69 +92,62 @@ const About = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-14 px-2 justify-items-center">
+        <div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-2">
           {aboutData.map((item, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
               initial="offscreen"
               whileInView="onscreen"
-              viewport={{ once: false, amount: 0.4 }}
-              transition={{ delay: index * 0.09 }}
-              className={`
-                relative rounded-3xl shadow-2xl bg-gradient-to-br ${item.bg}
-                p-2 group overflow-visible
-                ${cardRotations[index % cardRotations.length]}
-                border border-white/30 backdrop-blur-[10px]
-                hover:scale-105 hover:shadow-2xl transition-all duration-300
-                before:absolute before:inset-0 before:bg-white/20 before:rounded-3xl before:pointer-events-none
-                flex flex-col items-center justify-center
-                aspect-square min-h-[22rem] max-h-[26rem]
-              `}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ delay: index * 0.1 }}
+              className="relative flex justify-center"
               style={{
-                boxShadow:
-                  "0 16px 48px 0 rgba(30,41,59,0.18), 0 1.5px 8px 0 rgba(30,41,59,0.10)",
-                zIndex: 1,
+                transformOrigin:
+                  index % 2 === 0 ? "left center" : "right center",
+                transform: `rotate(${index % 2 === 0 ? "-2deg" : "2deg"})`,
               }}
             >
-              {/* Card Image (not rotated) */}
-              <div className="relative z-10 w-full h-80 max-h-80 flex items-center justify-center">
+              {/* Card Background with gradient */}
+              <div
+                className={`
+                absolute inset-0 rounded-2xl bg-gradient-to-br ${item.bgColor} 
+                transform rotate-2 scale-[1.03] z-0
+              `}
+              ></div>
+
+              {/* Card Content */}
+              <div
+                className="
+                relative bg-white rounded-xl overflow-hidden shadow-lg z-10
+                aspect-video w-full max-w-md 
+                transition-all duration-300 hover:shadow-xl hover:scale-[1.03]
+              "
+              >
                 <img
                   src={item.img}
                   alt="about"
-                  className="rounded-2xl object-cover w-full h-80 max-h-80 aspect-square transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    boxShadow: "0 4px 32px 0 rgba(30,41,59,0.13)",
-                    border: "2.5px solid rgba(255,255,255,0.22)",
-                    background: "rgba(255,255,255,0.13)",
-                    zIndex: 10,
-                  }}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
                 />
-                {/* Colored Gradient Dot on Card Corner (now overlayed on image) */}
-                <span
-                  className={`
-                    absolute w-14 h-14 rounded-full
-                    shadow-2xl border-4 border-white/40
-                    ${dotPositions[index % dotPositions.length]}
-                    flex items-center justify-center
-                    overflow-hidden
-                    ring-4 ring-white/30
-                    ${item.dot}
-                  `}
-                  style={{
-                    zIndex: 20,
-                    filter: "drop-shadow(0 6px 16px rgba(0,0,0,0.18))",
-                    boxShadow:
-                      "0 4px 24px 0 rgba(30,41,59,0.22), 0 0 0 8px rgba(255,255,255,0.10) inset",
-                  }}
-                ></span>
-                {/* Glass overlay for image
-                <div className="absolute inset-0 rounded-2xl pointer-events-none bg-white/20 z-30"></div> */}
+
+                {/* Colored Dot */}
+                <div
+                  className={`absolute ${item.dotPosition} w-6 h-6 rounded-full ${item.dotColor} border-2 border-white shadow-md`}
+                ></div>
               </div>
-              {/* Glassmorphism overlay for card */}
-              <div className="absolute inset-0 rounded-3xl pointer-events-none bg-white/15 border border-white/20"></div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Services heading at bottom as shown in image */}
+        <div className="text-center mt-16 relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Our <span className="text-blue-500">Services</span>
+          </h2>
+          <p className="text-gray-700 font-medium mt-2">
+            Comprehensive Services, One Platform.
+          </p>
         </div>
       </div>
     </section>
