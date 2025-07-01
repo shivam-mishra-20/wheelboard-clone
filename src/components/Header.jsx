@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
   const [scrollDirection, setScrollDirection] = useState("up");
+  const [temporaryExpanded, setTemporaryExpanded] = useState(false);
   let lastScrollY = window.scrollY;
 
   // Handle scroll event to change navbar appearance on scroll
   useEffect(() => {
     const handleScroll = () => {
+      // Reset temporary expanded state on scroll
+      if (temporaryExpanded) {
+        setTemporaryExpanded(false);
+      }
+
       if (window.scrollY > 10) {
         setScrolled(true);
       } else {
@@ -48,7 +54,21 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isOpen]); // Make sure navLinks is in scope
+  }, [isOpen, temporaryExpanded]); // Add temporaryExpanded to dependencies
+
+  // Handle logo click to temporarily expand navbar
+  const handleLogoClick = () => {
+    if (scrolled) {
+      setTemporaryExpanded(true);
+      // Auto collapse after 3 seconds if no interaction
+      setTimeout(() => {
+        setTemporaryExpanded(false);
+      }, 3000);
+    }
+  };
+
+  // Determine if navbar should appear expanded
+  const isExpanded = !scrolled || temporaryExpanded;
 
   // Navigation links data
   const navLinks = [
@@ -64,44 +84,57 @@ const Header = () => {
 
   // Render desktop navigation
   const renderDesktopNav = () => (
-    <nav className="hidden md:flex items-center justify-center space-x-10 absolute left-1/2 transform -translate-x-1/2">
-      {navLinks.map((link) => (
-        <motion.a
-          key={link.id}
-          href={`#${link.id}`}
-          className={`font-medium text-sm relative font-poppins tracking-wide group ${
-            activeLink === link.id
-              ? "text-purple-900"
-              : "text-gray-700 hover:text-purple-900"
-          } transition-colors duration-300`}
-          onClick={() => setActiveLink(link.id)}
-          whileHover={{ y: -2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    <AnimatePresence>
+      {isExpanded && (
+        <motion.nav
+          className="hidden md:flex items-center justify-center space-x-10 absolute left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 1, width: "auto" }}
+          exit={{ opacity: 0, width: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          {link.label}
-          {/* Active underline */}
-          {activeLink === link.id && (
-            <motion.span
-              layoutId="activeIndicator"
-              className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-900 rounded-full"
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "100%" }}
-              transition={{ duration: 0.3 }}
-            />
-          )}
-          {/* Hover underline */}
-          <span
-            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-400 rounded-full pointer-events-none transition-all duration-200 scale-x-0 group-hover:scale-x-100"
-            aria-hidden="true"
-          />
-        </motion.a>
-      ))}
-    </nav>
+          {navLinks.map((link) => (
+            <motion.a
+              key={link.id}
+              href={`#${link.id}`}
+              className={`font-medium text-sm relative font-poppins tracking-wide group ${
+                activeLink === link.id
+                  ? "text-purple-900"
+                  : "text-gray-700 hover:text-purple-900"
+              } transition-colors duration-300`}
+              onClick={() => setActiveLink(link.id)}
+              whileHover={{ y: -2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              {link.label}
+              {/* Active underline */}
+              {activeLink === link.id && (
+                <motion.span
+                  layoutId="activeIndicator"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-900 rounded-full"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+              {/* Hover underline */}
+              <span
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-400 rounded-full pointer-events-none transition-all duration-200 scale-x-0 group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </motion.a>
+          ))}
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 
   // --- Updated Mobile Nav ---
   const renderMobileNav = () => (
-    <div className="md:hidden flex items-center">
+    <div
+      className={`md:hidden flex items-center ${
+        !isExpanded ? "invisible" : "visible"
+      }`}
+    >
       {/* Hamburger Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -148,7 +181,7 @@ const Header = () => {
         }
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`absolute top-full left-0 right-0 bg-[#F4E1F9] rounded-b-2xl shadow-xl overflow-hidden mt-2 z-40 ${
-          isOpen ? "py-4 px-6" : "p-0"
+          isOpen ? "py-4 px-0" : "p-0"
         }`}
       >
         <nav className="flex flex-col space-y-2">
@@ -202,44 +235,122 @@ const Header = () => {
     </div>
   );
 
+  // Render the mobile logo section with proper collapsing
+  const renderMobileLogo = () => (
+    <motion.div
+      className="md:hidden flex items-center"
+      whileHover={{ scale: 1.03 }}
+      onClick={handleLogoClick}
+      style={{
+        cursor: scrolled ? "pointer" : "default",
+        width: isExpanded ? "auto" : "100%",
+        justifyContent: isExpanded ? "flex-start" : "center",
+        marginLeft: isExpanded ? "0" : "0", // Remove any left margin when collapsed
+      }}
+      animate={{
+        scale: isExpanded ? 1 : 0.85,
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.img
+        src="/Logo.png"
+        alt="Wheelboard Logo"
+        className="w-auto h-16 -my-12" // Keep consistent height
+        animate={{
+          rotate: scrolled && !temporaryExpanded ? 360 : 0,
+        }}
+        transition={{
+          duration: scrolled && !temporaryExpanded ? 0.5 : 0.2,
+          type: "spring",
+          stiffness: 60,
+        }}
+      />
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.h1
+            className="font-bold text-black ml-0 font-poppins text-xl"
+            initial={{ opacity: 0, width: 0, marginLeft: 0 }}
+            animate={{ opacity: 1, width: "auto", marginLeft: 2 }}
+            exit={{ opacity: 0, width: 0, marginLeft: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            Wheelboard
+          </motion.h1>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+
+  // Render desktop logo section
+  const renderDesktopLogo = () => (
+    <motion.div
+      className="hidden md:flex items-center -ml-10"
+      whileHover={{ scale: 1.03 }}
+      onClick={handleLogoClick}
+      style={{ cursor: scrolled ? "pointer" : "default" }}
+      animate={{
+        scale: isExpanded ? 1 : 0.85,
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.img
+        src="/Logo.png"
+        alt="Wheelboard Logo"
+        className="w-auto h-24 -my-20"
+        animate={{
+          rotate: scrolled && !temporaryExpanded ? 360 : 0,
+        }}
+        transition={{
+          duration: scrolled && !temporaryExpanded ? 0.5 : 0.2,
+          type: "spring",
+          stiffness: 60,
+        }}
+      />
+      <motion.h1
+        className={`font-bold text-black ml-0 font-poppins text-2xl ${
+          scrolled && !temporaryExpanded ? "md:block hidden" : "block"
+        }`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        Wheelboard
+      </motion.h1>
+    </motion.div>
+  );
+
   return (
     <motion.header
-      className={`fixed top-4 left-0 right-0 z-50 w-11/12 mx-auto max-w-screen-xl transition-all duration-300 ${
-        scrolled ? "top-2" : "top-4"
-      }`}
+      className="fixed top-4 left-0 right-0 z-50 mx-auto transition-all duration-300"
+      style={{
+        width: isExpanded
+          ? "92%"
+          : scrolled
+          ? window.innerWidth < 768
+            ? "90px" // Further reduced width for collapsed mobile state
+            : "auto"
+          : "92%",
+        maxWidth: isExpanded ? "1280px" : "500px",
+      }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
       <div
-        className="bg-[#F4E1F9] rounded-3xl shadow-xl"
+        className={`bg-[#F4E1F9] rounded-3xl shadow-xl transition-all duration-300 py-3`}
         style={{
           boxShadow: "0 4px 14px rgba(0, 125, 252, 0.3)",
           fontFamily: "Poppins, sans-serif",
         }}
       >
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center pr-4 relative">
-          {/* Logo */}
-          <motion.div
-            className="flex items-center -ml-10"
-            whileHover={{ scale: 1.03 }}
-          >
-            <motion.img
-              src="/Logo.png"
-              alt="Wheelboard Logo"
-              className="h-24 w-auto -my-20"
-              whileHover={{ rotate: 10 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.h1
-              className="text-2xl font-bold text-black ml-0 font-poppins "
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              Wheelboard
-            </motion.h1>
-          </motion.div>
+        <div
+          className={`container mx-auto flex justify-between items-center relative ${
+            isExpanded ? "px-4" : "px-0"
+          }`}
+        >
+          {/* Render different logo sections based on screen size */}
+          {renderMobileLogo()}
+          {renderDesktopLogo()}
 
           {/* Desktop Navigation */}
           {renderDesktopNav()}
@@ -248,6 +359,9 @@ const Header = () => {
           <motion.a
             href="#contact"
             className="hidden md:flex items-center px-6 py-2 rounded-full font-medium transition duration-300"
+            animate={{
+              scale: isExpanded ? 1 : 0.9,
+            }}
             style={{
               background: "#f4e1f9",
               border: "1px solid rgba(255, 255, 255, 0.6)",
@@ -257,7 +371,7 @@ const Header = () => {
               color: "#666",
             }}
             whileHover={{
-              scale: 1.02,
+              scale: isExpanded ? 1.02 : 0.95,
               boxShadow:
                 "0 6px 20px rgba(190, 150, 235, 0.25), 0 1px 5px rgba(190, 150, 235, 0.15)",
             }}
