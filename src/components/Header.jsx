@@ -53,10 +53,13 @@ const Header = () => {
   // Navigation links data
   const navLinks = [
     { id: "home", label: "Home" },
-    { id: "services", label: "Services" },
+    // { id: "why-choose", label: "Why Choose" },
     { id: "about", label: "About Us" },
-    { id: "features", label: "Features" },
+    { id: "services", label: "Services" },
+    { id: "mission-vision", label: "Mission & Vision" },
+    { id: "industries", label: "Industries" },
     { id: "faq", label: "FAQ" },
+    // { id: "contact", label: "Contact" },
   ];
 
   // Render desktop navigation

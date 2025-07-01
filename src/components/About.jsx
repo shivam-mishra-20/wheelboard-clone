@@ -139,16 +139,6 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Services heading at bottom as shown in image */}
-        <div className="text-center mt-16 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Our <span className="text-blue-500">Services</span>
-          </h2>
-          <p className="text-gray-700 font-medium mt-2">
-            Comprehensive Services, One Platform.
-          </p>
-        </div>
       </div>
     </section>
   );
