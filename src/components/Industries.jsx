@@ -5,7 +5,7 @@ import {
   useAnimation,
   useMotionValue,
 } from "framer-motion";
-import { FaTruck, FaHardHat, FaMountain } from "react-icons/fa";
+import { FaTruck, FaHardHat, FaMountain, FaIndustry } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Industries = () => {
@@ -27,6 +27,11 @@ const Industries = () => {
     { id: 3, image: "/Bus.jpg", alt: "Commercial passenger bus" },
     { id: 4, image: "/mining-truck.jpg", alt: "Heavy mining dump truck" },
     { id: 5, image: "/excavator.jpg", alt: "Construction excavator" },
+    {
+      id: 6,
+      image: "/Yellow-truck.jpg",
+      alt: "Construction crane lifting materials",
+    },
   ];
 
   useEffect(() => {
@@ -157,33 +162,131 @@ const Industries = () => {
 
   const serviceCards = [
     {
-      title: "Logistics",
+      title: "Shipment",
       icon: <FaTruck className="text-white text-3xl" />,
       description:
-        "Unlock full potential of your fleet with Wheelboard smart dashboard. Plan, Grow Sustainably: all without any initial investment.",
-      bgColor: "bg-blue-600",
+        "We offer agile, tech-enabled logistics solutions — ensuring on-time delivery, rapid restocking and scalable distribution.",
+      bgColor: "from-blue-600 to-blue-700",
+      bgImage: "/red-truck.png",
     },
     {
       title: "Construction",
       icon: <FaHardHat className="text-white text-3xl" />,
       description:
-        "Drive Efficiency. Enhanced Safety. Optimize Asset Utilization",
-      bgColor: "bg-orange-500",
+        "From raw materials to heavy machinery, we deliver tailored transportation for real estate developers, contractors, and infrastructure projects.",
+      bgColor: "from-orange-500 to-orange-600",
+      bgImage: "/bulldozer.png",
     },
     {
       title: "Mining",
       icon: <FaMountain className="text-white text-3xl" />,
       description:
-        "Empower your fleet operations with the right skills and actionable, data-driven insights.",
-      bgColor: "bg-green-500",
+        "We manage the secure, high-capacity transport of ores, mining equipment, and hazardous materials across rugged terrains.",
+      bgColor: "from-green-500 to-green-600",
+      bgImage: "/mining-truck.jpg",
     },
   ];
 
-  return (
-    <section id="industries" className="py-16 px-4 max-w-7xl mx-auto">
-      <div className="bg-white rounded-3xl p-8 shadow-lg">
+  // Render mobile view
+  const renderMobileView = () => {
+    return (
+      <div className="py-8">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-3">
+            Industries <span className="text-blue-500">we Serve</span>
+          </h2>
+          <p className="text-lg font-semibold">
+            Specialized logistics solutions
+            <br />
+            across various sectors
+          </p>
+        </div>
+
+        {/* Service Cards - Mobile */}
+        <div className="flex flex-col gap-4 mb-10">
+          {serviceCards.map((card, index) => (
+            <div
+              key={index}
+              className="relative rounded-xl p-5 text-white shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl"
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: "1000px",
+              }}
+            >
+              {/* Background image with overlay */}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${card.bgImage})` }}
+              />
+
+              {/* Gradient overlay */}
+              <div
+                className={`absolute inset-0 z-10 bg-gradient-to-br ${card.bgColor} opacity-85`}
+              />
+
+              {/* Card content */}
+              <div className="relative z-20">
+                <div className="icons">{card.icon}</div>
+                <h3 className="text-xl font-bold mb-2 text-shadow-sm">
+                  {card.title}
+                </h3>
+                <p className="text-sm opacity-95 text-shadow-sm">
+                  {card.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Carousel - Mobile */}
+        <div className="relative pt-8 pb-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5 }}
+              className="w-full aspect-video rounded-2xl overflow-hidden shadow-xl mx-auto"
+            >
+              <img
+                src={slides[currentIndex].image}
+                alt={slides[currentIndex].alt}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation dots - Mobile */}
+          <div className="absolute -bottom-2 left-0 right-0 flex justify-center items-center gap-2 z-10 mt-4">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`rounded-full transition-all duration-300 ${
+                  currentIndex === index
+                    ? "w-[8px] h-[8px] bg-blue-500"
+                    : "w-[6px] h-[6px] bg-gray-300"
+                }`}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setAutoScroll(false);
+                  setTimeout(() => setAutoScroll(true), 5000);
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Render desktop view
+  const renderDesktopView = () => {
+    return (
+      <div className="py-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Industries <span className="text-blue-500">we Serve</span>
           </h2>
           <div className="max-w-2xl mx-auto mt-6">
@@ -195,30 +298,56 @@ const Industries = () => {
           </div>
         </div>
 
-        {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* Service Cards - Desktop */}
+        <div className="grid grid-cols-3 gap-6 mb-16">
           {serviceCards.map((card, index) => (
             <div
               key={index}
-              className={`${card.bgColor} rounded-2xl p-6 text-white flex flex-col`}
+              className="relative rounded-2xl p-6 text-white shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:translate-y-[-5px]"
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: "1000px",
+              }}
             >
-              <div className="mb-4">{card.icon}</div>
-              <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-              <p className="text-sm opacity-90">{card.description}</p>
+              {/* Background image */}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${card.bgImage})` }}
+              />
+
+              {/* Gradient overlay */}
+              <div
+                className={`absolute inset-0 z-10 bg-gradient-to-br ${card.bgColor} opacity-80`}
+              />
+
+              {/* 3D elements - subtle abstract shapes */}
+              <div className="absolute bottom-0 right-0 w-32 h-32 rounded-full bg-white opacity-10 transform translate-x-16 translate-y-16 rotate-12 z-10"></div>
+              <div className="absolute top-0 left-0 w-20 h-20 rounded-full bg-white opacity-10 transform -translate-x-10 -translate-y-10 z-10"></div>
+
+              {/* Content with 3D effect */}
+              <div className="relative z-20">
+                <div className="icons">{card.icon}</div>
+                <h3 className="text-xl font-bold mb-2 text-shadow">
+                  {card.title}
+                </h3>
+                <p className="text-sm opacity-90 text-shadow-sm">
+                  {card.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Enhanced Carousel */}
+        {/* Enhanced Carousel - Desktop */}
         <div
-          className="relative mt-16 mb-20 py-16 overflow-hidden"
+          className="relative py-20 overflow-hidden"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <motion.div
             ref={carouselRef}
-            className="w-full h-[280px] sm:h-[340px] md:h-[420px] relative"
-            drag={isMobile ? false : "x"}
+            className="w-full h-[420px] relative"
+            drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.1}
             onDragStart={handleDragStart}
@@ -234,22 +363,21 @@ const Industries = () => {
                 return (
                   <motion.div
                     key={slide.id}
-                    className="absolute rounded-[32px] overflow-hidden"
+                    className="absolute rounded-[32px] overflow-hidden shadow-2xl"
                     initial={false}
                     animate={{
-                      left: isMobile
-                        ? "50%"
-                        : position === "center"
-                        ? "50%"
-                        : position === "left"
-                        ? "22%"
-                        : position === "right"
-                        ? "78%"
-                        : position === "farLeft"
-                        ? "5%"
-                        : position === "farRight"
-                        ? "95%"
-                        : "150%",
+                      left:
+                        position === "center"
+                          ? "50%"
+                          : position === "left"
+                          ? "22%"
+                          : position === "right"
+                          ? "78%"
+                          : position === "farLeft"
+                          ? "5%"
+                          : position === "farRight"
+                          ? "95%"
+                          : "150%",
                       x: "-50%",
                       scale:
                         position === "center"
@@ -283,7 +411,7 @@ const Industries = () => {
                       duration: 0.6,
                     }}
                     whileHover={
-                      !isMobile && position !== "hidden"
+                      position !== "hidden"
                         ? {
                             scale:
                               position === "center"
@@ -323,9 +451,7 @@ const Industries = () => {
                       alt={slide.alt}
                       className="w-full h-full object-cover"
                       draggable={false}
-                      style={{
-                        filter: slideStyles.filter || "none",
-                      }}
+                      style={{ filter: slideStyles.filter || "none" }}
                     />
                   </motion.div>
                 );
@@ -333,7 +459,7 @@ const Industries = () => {
             </div>
           </motion.div>
 
-          {/* Navigation controls with auto-scroll indicator */}
+          {/* Navigation controls - Desktop */}
           <div className="absolute -bottom-4 left-0 right-0 flex flex-col items-center gap-3 z-40 pb-6">
             <div className="flex items-center gap-10">
               <button
@@ -342,7 +468,7 @@ const Industries = () => {
                   setAutoScroll(false);
                   setTimeout(() => setAutoScroll(true), 5000);
                 }}
-                className="bg-transparent border-0 text-gray-600 hover:text-black focus:outline-none transition-colors duration-200"
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 rounded-full text-gray-700 hover:text-black hover:bg-opacity-50 focus:outline-none transition-all duration-200 shadow-md"
                 aria-label="Previous slide"
               >
                 <IoIosArrowBack size={20} />
@@ -352,10 +478,10 @@ const Industries = () => {
                 {slides.map((slide, index) => (
                   <button
                     key={slide.id}
-                    className={`rounded-full transition-all duration-300 border ${
+                    className={`rounded-full transition-all duration-300 ${
                       currentIndex === index
-                        ? "w-[8px] h-[8px] bg-black border-black"
-                        : "w-[8px] h-[8px] bg-transparent border-gray-400"
+                        ? "w-[10px] h-[10px] bg-blue-500 shadow-md"
+                        : "w-[8px] h-[8px] bg-gray-300"
                     }`}
                     onClick={() => {
                       setCurrentIndex(index);
@@ -373,7 +499,7 @@ const Industries = () => {
                   setAutoScroll(false);
                   setTimeout(() => setAutoScroll(true), 5000);
                 }}
-                className="bg-transparent border-0 text-gray-600 hover:text-black focus:outline-none transition-colors duration-200"
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 rounded-full text-gray-700 hover:text-black hover:bg-opacity-50 focus:outline-none transition-all duration-200 shadow-md"
                 aria-label="Next slide"
               >
                 <IoIosArrowForward size={20} />
@@ -381,6 +507,14 @@ const Industries = () => {
             </div>
           </div>
         </div>
+      </div>
+    );
+  };
+
+  return (
+    <section id="industries" className="py-16 px-4 max-w-7xl mx-auto">
+      <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+        {isMobile ? renderMobileView() : renderDesktopView()}
       </div>
     </section>
   );

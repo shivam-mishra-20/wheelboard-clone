@@ -1,19 +1,23 @@
 import React from "react";
+import { FaUserTie, FaCog, FaLightbulb } from "react-icons/fa";
 
-// Unsplash images for icons
+// Updated services with React icons
 const services = [
   {
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=128&q=80",
+    icon: FaUserTie,
+    iconColor: "#4A90E2",
     title: "Skill Management",
     description: "Build workforce that fits your operation",
   },
   {
-    img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=facearea&w=128&q=80",
+    icon: FaCog,
+    iconColor: "#F5A623",
     title: "Tyre Management",
     description: "We maintain and manage your tires",
   },
   {
-    img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=facearea&w=128&q=80",
+    icon: FaLightbulb,
+    iconColor: "#50C878",
     title: "Consultation",
     description: "We manage your operational complexities",
   },
@@ -23,26 +27,29 @@ const highlightStyle = "text-orange-500 font-semibold";
 const blueStyle = "text-blue-600 font-bold";
 
 const Services = () => (
-  <section id="services" className="py-16 bg-white">
+  <section id="services" className="py-20 md:py-24 bg-white">
     <div className="max-w-5xl mx-auto px-4">
-      {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-        Our <span className={blueStyle}>Services</span>
-      </h2>
-      {/* Subheading */}
-      <div className="text-center font-semibold text-lg mb-2">
-        Comprehensive Services, One Platform.
+      {/* Heading with fade-in animation */}
+      <div className="text-center mb-14 animate-fade-in">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+          Our <span className={blueStyle}>Services</span>
+        </h2>
+        {/* Subheading */}
+        <div className="text-center font-semibold text-lg mb-2">
+          Comprehensive Services, One Platform.
+        </div>
+        {/* Description */}
+        <div className="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
+          Our services span across&nbsp;
+          <span className={highlightStyle}>‘Skill management</span>,&nbsp;
+          <span className={highlightStyle}>Tire management</span> and&nbsp;
+          <span className={highlightStyle}>Strategic solutions</span>
+          &nbsp;that, delivers operational excellence and positions us as your
+          partner for success.
+        </div>
       </div>
-      {/* Description */}
-      <div className="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
-        Our services span across&nbsp;
-        <span className={highlightStyle}>‘Skill management</span>,&nbsp;
-        <span className={highlightStyle}>Tire management</span> and&nbsp;
-        <span className={highlightStyle}>Strategic solutions</span>
-        &nbsp;that, delivers operational excellence and positions us as your
-        partner for success.
-      </div>
-      {/* Cards */}
+
+      {/* Cards with improved layout */}
       <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
         {services.map((service, idx) => {
           // Glare effect setup
@@ -98,17 +105,22 @@ const Services = () => (
           return (
             <div
               key={idx}
-              className="flex-1 relative rounded-[2rem] px-6 py-8 flex flex-col items-center text-center transition-all duration-200"
+              className="flex-1 relative rounded-[2rem] px-6 py-8 flex flex-col items-center text-center 
+                         transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2
+                         animate-slide-up"
               style={{
                 minWidth: 260,
                 maxWidth: 340,
                 minHeight: 260,
+                animationDelay: `${idx * 200}ms`,
+                animationFillMode: "both",
               }}
               onMouseEnter={animateIn}
               onMouseLeave={animateOut}
             >
               {/* Glare overlay */}
               <div ref={overlayRef} style={overlayStyle} />
+
               {/* Card background rectangle */}
               <img
                 src="/Rectangle 7.png"
@@ -118,27 +130,80 @@ const Services = () => (
                 aria-hidden="true"
                 draggable={false}
               />
+
+              {/* Glassy overlay for frosted glass effect */}
+              <div className="absolute inset-0 rounded-[2rem] bg-white/30 backdrop-blur-[2px] z-[1]"></div>
+
+              {/* Content with enhanced styling */}
               <div className="relative z-10 flex flex-col items-center">
-                <div className="w-14 h-14 mb-3 flex items-center justify-center rounded-full bg-gray-100 shadow-md">
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-12 h-12 object-cover rounded-full"
-                    draggable={false}
+                {/* Icon with animation */}
+                <div
+                  className="w-16 h-16 mb-4 flex items-center justify-center rounded-full 
+                               bg-white/80 backdrop-blur-sm shadow-lg
+                               transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                >
+                  <service.icon
+                    size={28}
+                    color={service.iconColor}
+                    className="transition-transform duration-500 hover:rotate-12"
                   />
                 </div>
-                <div className="font-semibold text-lg mb-1">
+
+                <div className="font-semibold text-lg md:text-xl mb-2 text-gray-800">
                   {service.title}
                 </div>
-                <div className="text-gray-500 text-base">
+
+                <div className="text-gray-600 text-base">
                   {service.description}
                 </div>
+
+                {/* Learn more button */}
+                <button
+                  className="mt-5 py-2 px-4 rounded-full bg-white/50 backdrop-blur-sm
+                                  border border-white/20 text-blue-600 font-medium
+                                  transition-all duration-300 hover:bg-blue-50 hover:shadow-md
+                                  opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0"
+                >
+                  Learn More
+                </button>
               </div>
             </div>
           );
         })}
       </div>
     </div>
+
+    {/* CSS animations */}
+    <style jsx>{`
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      .animate-slide-up {
+        animation: slideUp 0.8s ease-out forwards;
+        opacity: 0;
+      }
+    `}</style>
   </section>
 );
 

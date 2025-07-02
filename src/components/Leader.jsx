@@ -1,41 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const Leader = () => {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowWidth < 768 ? <MobileView /> : <DesktopView />;
+};
+
+const DesktopView = () => {
   return (
     <section className="py-16 bg-gray-50 font-poppins">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-2">
+        <h2 className="text-4xl font-bold text-center mb-2">
           Meet <span className="text-blue-600">Our Leader</span>
         </h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
-          The experts behind Wheelboard’s success story.
+          The experts behind Wheelboard's success story.
         </p>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
-          {/* 🔥 Gradient Profile Card */}
-          <div className="relative group w-full h-113 max-w-xs rounded-3xl overflow-hidden shadow-xl bg-white p-[2px] backdrop-blur-md transition-all duration-500 hover:scale-[1.02]">
-            <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-6 text-center relative z-10">
-              <img
-                src="/profile-pic.png"
-                alt="Saloni Kumari"
-                className="w-50 h-50 rounded-full overflow-hidden justify-center mx-auto "
-              />
-              <h3 className="text-xl font-semibold text-gray-900">
+          {/* Profile Card */}
+          <div className="relative group w-full h-auto max-w-xs rounded-3xl overflow-hidden shadow-md bg-white backdrop-blur-md transition-all duration-500 hover:scale-[1.02]">
+            <div className="bg-white rounded-3xl p-6 text-center relative z-10">
+              <div className="flex justify-center items-center">
+                <img
+                  src="/profile-pic.png"
+                  alt="Saloni Kumari"
+                  className="w-30 h-30 rounded-full object-fill"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mt-2">
                 Saloni Kumari
               </h3>
-              <p className="text-orange-500 font-medium mb-3">
+              <p className="text-orange-500 font-medium mb-4">
                 Co-founder & CEO
               </p>
-              <div className="text-sm text-gray-800 bg-white/10 px-4 py-3 rounded-xl">
+              <div className="text-sm text-gray-800 bg-white/80 shadow-inner px-4 py-3 rounded-xl border border-gray-100">
                 Building an ecosystem <br />
                 <span className="font-semibold text-gray-900">
-                  ‘grounded in{" "}
-                  <span className="text-blue-500">Empowerment</span>,<br />
-                  driven by <span className="text-blue-500">Efficiency</span>,
+                  'grounded in{" "}
+                  <span className="text-blue-600">Empowerment</span>,<br />
+                  driven by <span className="text-blue-600">Efficiency</span>,
                   <br />
                   united by{" "}
-                  <span className="text-blue-500">Shared Success’</span>
+                  <span className="text-blue-600">Shared Success'</span>
                 </span>
               </div>
               <div className="flex justify-center gap-4 mt-4">
@@ -58,13 +74,13 @@ const Leader = () => {
               </div>
             </div>
 
-            {/* Animated shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-700 animate-tilt rounded-3xl" />
+            {/* Subtle border gradient */}
+            <div className="absolute inset-0 p-[1px] rounded-3xl bg-gradient-to-br from-blue-100 via-transparent to-pink-100 opacity-70" />
           </div>
 
-          {/* 💡 Visionary Leadership */}
-          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-8 w-full max-w-2xl md:h-100 shadow-sm">
-            <h4 className="text-xl font-bold mb-4 text-gray-800">
+          {/* Visionary Leadership */}
+          <div className="bg-white border border-orange-200 rounded-2xl p-8 w-full max-w-2xl shadow-sm">
+            <h4 className="text-2xl font-bold mb-4 text-gray-900">
               Visionary Leadership
             </h4>
             <p className="text-gray-700 mb-4">
@@ -72,19 +88,122 @@ const Leader = () => {
               <span className="text-orange-600 font-semibold">
                 Wheelboard Solutions
               </span>
-              , Saloni is transforming the transport industry with a mission to
-              build a thriving ecosystem where growth and success are shared.
+              , Saloni has a vision to transforming transport Industry. Her
+              mission is to build a thriving ecosystem where growth and success
+              are shared, and every service delivered, contributes positively to
+              society and the environment.
             </p>
-            <p className="italic text-gray-800 mb-4">
-              "Transport is more than movement, it’s a force for empowerment,
-              sustainability, and shared success.” At{" "}
+            <p className="text-gray-800 mb-4">
+              "Transport is more than movement, it's a force for empowerment,
+              sustainability, and shared success."
+            </p>
+            <p className="text-gray-800 mb-1">
+              At{" "}
               <span className="text-orange-600 font-semibold">Wheelboard</span>,
-              we’re building an ecosystem where every stakeholder thrives."
+              we're building an ecosystem where every stakeholder thrives."
             </p>
-            <p className="text-gray-800 font-medium">
+            <p className="text-gray-800 font-medium mt-4">
               — Saloni Kumari
               <br />
               <span className="text-gray-500 text-sm">
+                Co-founder & CEO, Wheelboard
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const MobileView = () => {
+  return (
+    <section className="py-12 bg-gray-50 font-poppins">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-2">
+          Meet <span className="text-blue-600">Our Leader</span>
+        </h2>
+        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+          The experts behind Wheelboard's success story.
+        </p>
+
+        <div className="flex flex-col items-center gap-6">
+          {/* Profile Card - Mobile */}
+          <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-md bg-white">
+            <div className="rounded-3xl p-6 text-center relative z-10">
+              <div className="flex justify-center items-center">
+                <img
+                  src="/profile-pic.png"
+                  alt="Saloni Kumari"
+                  className="w-30 h-30 rounded-full object-fill"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mt-2">
+                Saloni Kumari
+              </h3>
+              <p className="text-orange-500 font-medium mb-3">
+                Co-founder & CEO
+              </p>
+              <div className="text-sm text-gray-800 bg-white/80 shadow-inner px-4 py-3 rounded-xl border border-gray-100 mb-3">
+                Building an ecosystem <br />
+                <span className="font-semibold text-gray-900">
+                  'grounded in{" "}
+                  <span className="text-blue-600">Empowerment</span>, driven by{" "}
+                  <span className="text-blue-600">Efficiency</span>, united by{" "}
+                  <span className="text-blue-600">Shared Success'</span>
+                </span>
+              </div>
+              <div className="flex justify-center gap-4 mt-3">
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-blue-700 hover:text-blue-900 text-xl"
+                >
+                  <FaLinkedin />
+                </a>
+                <a
+                  href="mailto:saloni@wheelboard.com"
+                  aria-label="Email"
+                  className="text-gray-600 hover:text-gray-900 text-xl"
+                >
+                  <FaEnvelope />
+                </a>
+              </div>
+            </div>
+
+            {/* Subtle border gradient */}
+            <div className="absolute inset-0 p-[1px] rounded-3xl bg-gradient-to-br from-blue-100 via-transparent to-pink-100 opacity-70" />
+          </div>
+
+          {/* Visionary Leadership - Mobile */}
+          <div className="bg-white border border-orange-200 rounded-xl p-6 w-full max-w-sm shadow-sm">
+            <h4 className="text-xl font-bold mb-3 text-gray-900">
+              Visionary Leadership
+            </h4>
+            <p className="text-gray-700 text-sm mb-3">
+              As the co-founder of{" "}
+              <span className="text-orange-600 font-semibold">
+                Wheelboard Solutions
+              </span>
+              , Saloni has a vision to transforming transport Industry. Her
+              mission is to build a thriving ecosystem where growth and success
+              are shared.
+            </p>
+            <p className="text-gray-800 text-sm mb-2">
+              "Transport is more than movement, it's a force for empowerment,
+              sustainability, and shared success."
+            </p>
+            <p className="text-gray-800 text-sm mb-2">
+              At{" "}
+              <span className="text-orange-600 font-semibold">Wheelboard</span>,
+              we're building an ecosystem where every stakeholder thrives."
+            </p>
+            <p className="text-gray-800 font-medium text-sm mt-3">
+              — Saloni Kumari
+              <br />
+              <span className="text-gray-500 text-xs">
                 Co-founder & CEO, Wheelboard
               </span>
             </p>

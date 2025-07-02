@@ -54,10 +54,10 @@ const FAQ = () => {
     faqsCol.map((faq, idx) => (
       <div
         key={idx}
-        className="rounded-2xl bg-white/30 shadow-2xl backdrop-blur-lg border border-white/40 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] mb-6"
+        className="rounded-2xl bg-white/30 shadow-2xl backdrop-blur-lg border border-white/40 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(255,94,95,0.2)] mb-6"
         style={{
           boxShadow:
-            "0 8px 32px 0 rgba(31,38,135,0.37), 0 1.5px 4px 0 rgba(0,0,0,0.07)",
+            "0 8px 32px 0 rgba(255,94,95,0.15), 0 1.5px 4px 0 rgba(0,0,0,0.07)",
         }}
       >
         <button
@@ -67,9 +67,9 @@ const FAQ = () => {
           <span>{faq.question}</span>
           <span className="ml-6 text-2xl transition-transform duration-300 select-none">
             {openIndexes[colIdx] === idx ? (
-              <span className="text-purple-600">–</span>
+              <span className="text-[#ff5e5f]">–</span>
             ) : (
-              <span className="text-blue-600">+</span>
+              <span className="text-[#ff5e5f]">+</span>
             )}
           </span>
         </button>
@@ -81,11 +81,11 @@ const FAQ = () => {
           }`}
           style={{
             background:
-              "linear-gradient(120deg, rgba(255,255,255,0.7) 60%, rgba(200,200,255,0.2) 100%)",
+              "linear-gradient(120deg, rgba(255,255,255,0.7) 60%, rgba(255,94,95,0.1) 100%)",
             borderRadius: "0 0 1rem 1rem",
           }}
         >
-          <p className="text-gray-700 text-base">{faq.answer}</p>
+          <p className="text-[#545454] text-base">{faq.answer}</p>
         </div>
       </div>
     ));
@@ -93,17 +93,17 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="py-20 bg-gradient-to-br from-blue-100/60 via-white/60 to-purple-100/60 min-h-screen font-poppins"
+      className="py-20 bg-gradient-to-br from-[#fff5f5] via-white/80 to-[#ffeaea] min-h-screen font-poppins"
       style={{
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",
       }}
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-3 text-gray-800 drop-shadow-lg">
+        <h2 className="text-4xl font-bold text-center mb-3 text-[#545454] drop-shadow-lg">
           Frequently Asked Questions
         </h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-14 text-lg">
+        <p className="text-[#545454] text-center max-w-2xl mx-auto mb-14 text-lg">
           Find answers to common questions about our products and services
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
