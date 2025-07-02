@@ -127,18 +127,96 @@ const About = () => {
                 <img
                   src={item.img}
                   alt="about"
-                  className="w-full h-full object-cover"
                   loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
 
-                {/* Colored Dot */}
+                {/* Enhanced Image Overlay with better hover description */}
                 <div
-                  className={`absolute ${item.dotPosition} w-6 h-6 rounded-full ${item.dotColor} border-2 border-white shadow-md`}
-                ></div>
+                  className="absolute inset-0
+                              opacity-0 hover:opacity-100 transition-all duration-300 
+                              flex flex-col justify-end p-5 cursor-pointer group"
+                >
+                  <h4
+                    className="text-[#FF6B35] text-m font-extrabold transform translate-y-4 opacity-0 
+                              group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100 ease-out"
+                  >
+                    {
+                      [
+                        "Driver Excellence",
+                        "Smart Analytics",
+                        "Tire Management",
+                        "Expert Consultation",
+                        "Service & Maintenance",
+                        "Logistics Solutions",
+                      ][index]
+                    }
+                  </h4>
+                  <p
+                    className="text-[#FF6B35] text-sm font-semibold transform translate-y-4 opacity-0 
+                              group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100 ease-out"
+                  >
+                    {
+                      [
+                        "Professional drivers delivering exceptional service and safety.",
+                        "Data-driven insights to optimize your fleet operations.",
+                        "Complete tire lifecycle management for enhanced performance.",
+                        "Expert guidance to overcome operational challenges.",
+                        "Comprehensive maintenance solutions for your fleet.",
+                        "Streamlined logistics for maximum efficiency.",
+                      ][index]
+                    }
+                  </p>
+                </div>
+
+                {/* Animated Colored Dot */}
+                <div className="absolute z-20">
+                  <div
+                    className={`absolute ${item.dotPosition} w-6 h-6 rounded-full ${item.dotColor} border-2 border-white shadow-md animate-pulse`}
+                  ></div>
+                  <div
+                    className={`absolute ${item.dotPosition} w-6 h-6 rounded-full ${item.dotColor} border-2 border-white shadow-md opacity-75 animate-ping`}
+                    style={{
+                      animationDuration: "3s",
+                      animationDelay: `${index * 0.2}s`,
+                    }}
+                  ></div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Added company values section */}
+        <motion.div
+          className="relative z-10 max-w-4xl mx-auto mt-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: false }}
+        >
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Our Values</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              "Innovation",
+              "Sustainability",
+              "Reliability",
+              "Collaboration",
+              "Excellence",
+            ].map((value, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100"
+                whileHover={{ scale: 1.05, y: -5 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.1 }}
+              >
+                <span className="text-blue-600 font-medium">{value}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

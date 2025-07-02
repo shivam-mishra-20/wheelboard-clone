@@ -128,42 +128,42 @@ const Header = () => {
     </AnimatePresence>
   );
 
-  // --- Updated Mobile Nav ---
+  // --- Enhanced Mobile Nav with professional styling and smoother animations ---
   const renderMobileNav = () => (
-    <div
-      className={`md:hidden flex items-center ${
-        !isExpanded ? "invisible" : "visible"
-      }`}
-    >
-      {/* Hamburger Toggle Button */}
+    <div className="md:hidden flex items-center">
+      {/* Hamburger Toggle Button with enhanced styling */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-purple-900 hover:text-purple-700 focus:outline-none transition-transform duration-300"
+        className="text-purple-900 hover:text-purple-700 focus:outline-none transition-transform duration-300 p-2 rounded-lg hover:bg-purple-100/50"
         aria-label="Toggle menu"
       >
         <motion.div
           initial={false}
-          animate={isOpen ? { rotate: 90 } : { rotate: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          animate={isOpen ? { rotate: 45 } : { rotate: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+            duration: 0.4,
+          }}
         >
           <svg
             className="h-7 w-7"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            strokeWidth={1.5}
           >
             {isOpen ? (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
                 d="M6 18L18 6M6 6l12 12"
               />
             ) : (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
                 d="M4 6h16M4 12h16M4 18h16"
               />
             )}
@@ -171,113 +171,117 @@ const Header = () => {
         </motion.div>
       </button>
 
-      {/* Animated Slide Menu */}
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={
-          isOpen
-            ? { height: "auto", opacity: 1 }
-            : { height: 0, opacity: 0, transition: { delay: 0.1 } }
-        }
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`absolute top-full left-0 right-0 bg-[#F4E1F9] rounded-b-2xl shadow-xl overflow-hidden mt-2 z-40 ${
-          isOpen ? "py-4 px-0" : "p-0"
-        }`}
-      >
-        <nav className="flex flex-col space-y-2">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.id}
-              href={`#${link.id}`}
-              className={`block py-3 px-4 rounded-lg text-base font-medium transition-colors ${
-                activeLink === link.id
-                  ? "text-purple-900 bg-purple-50"
-                  : "text-gray-700 hover:text-purple-900 hover:bg-purple-50"
-              }`}
-              onClick={() => {
-                setActiveLink(link.id);
-                setIsOpen(false);
-              }}
-              whileHover={{ x: 4 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
-
-          {/* Contact Button */}
-          <motion.a
-            href="#contact"
-            className="mt-4 py-3 px-6 bg-purple-700 text-white rounded-lg font-semibold text-center transition hover:bg-purple-800"
-            onClick={() => setIsOpen(false)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.96 }}
+      {/* Enhanced Animated Slide Menu with backdrop blur */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0, y: -20 }}
+            animate={{ height: "auto", opacity: 1, y: 0 }}
+            exit={{
+              height: 0,
+              opacity: 0,
+              y: -20,
+              transition: { duration: 0.3, ease: "easeInOut" },
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.25, 1, 0.5, 1],
+              staggerChildren: 0.05,
+            }}
+            className="absolute top-full left-0 right-0 bg-[#F4E1F9]/95 backdrop-blur-md rounded-b-2xl shadow-lg overflow-hidden mt-2 z-40 border border-white/20"
+            style={{
+              boxShadow: "0 10px 25px rgba(148, 85, 206, 0.25)",
+            }}
           >
-            <div className="flex justify-center items-center gap-2">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <nav className="flex flex-col space-y-1 p-4">
+              {navLinks.map((link, index) => (
+                <motion.a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className={`py-3 px-5 rounded-xl text-base font-medium transition-all ${
+                    activeLink === link.id
+                      ? "text-purple-900 bg-purple-100/70"
+                      : "text-gray-700 hover:text-purple-900 hover:bg-purple-50"
+                  }`}
+                  onClick={() => {
+                    setActiveLink(link.id);
+                    setIsOpen(false);
+                  }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{
+                    delay: index * 0.05,
+                    duration: 0.3,
+                  }}
+                  whileHover={{
+                    x: 4,
+                    backgroundColor: "rgba(233, 213, 255, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+
+              {/* Enhanced Contact Button */}
+              <motion.a
+                href="#contact"
+                className="mt-4 py-3 px-6 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl font-semibold text-center transition shadow-md hover:shadow-lg"
+                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              Contact Us
-            </div>
-          </motion.a>
-        </nav>
-      </motion.div>
+                <div className="flex justify-center items-center gap-2">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  Contact Us
+                </div>
+              </motion.a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 
-  // Render the mobile logo section with proper collapsing
+  // Render the mobile logo section (without collapsing behavior)
   const renderMobileLogo = () => (
     <motion.div
       className="md:hidden flex items-center"
       whileHover={{ scale: 1.03 }}
-      onClick={handleLogoClick}
-      style={{
-        cursor: scrolled ? "pointer" : "default",
-        width: isExpanded ? "auto" : "100%",
-        justifyContent: isExpanded ? "flex-start" : "center",
-        marginLeft: isExpanded ? "0" : "0", // Remove any left margin when collapsed
-      }}
-      animate={{
-        scale: isExpanded ? 1 : 0.85,
-      }}
+      animate={{ scale: 1 }}
       transition={{ duration: 0.3 }}
     >
       <motion.img
         src="/Logo.png"
         alt="Wheelboard Logo"
-        className="w-auto h-16 -my-12" // Keep consistent height
-        animate={{
-          rotate: scrolled && !temporaryExpanded ? 360 : 0,
-        }}
-        transition={{
-          duration: scrolled && !temporaryExpanded ? 0.5 : 0.2,
-          type: "spring",
-          stiffness: 60,
-        }}
+        className="w-auto h-16 -my-12"
+        transition={{ duration: 0.2 }}
       />
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.h1
-            className="font-bold text-black ml-0 font-poppins text-xl"
-            initial={{ opacity: 0, width: 0, marginLeft: 0 }}
-            animate={{ opacity: 1, width: "auto", marginLeft: 2 }}
-            exit={{ opacity: 0, width: 0, marginLeft: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            Wheelboard
-          </motion.h1>
-        )}
-      </AnimatePresence>
+      <motion.h1
+        className="font-bold text-black ml-0 font-poppins text-xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        Wheelboard
+      </motion.h1>
     </motion.div>
   );
 
@@ -326,28 +330,28 @@ const Header = () => {
         width: isExpanded
           ? "92%"
           : scrolled
-          ? window.innerWidth < 768
-            ? "90px" // Further reduced width for collapsed mobile state
-            : "auto"
+          ? window.innerWidth >= 768
+            ? "auto"
+            : "92%"
           : "92%",
-        maxWidth: isExpanded ? "1280px" : "500px",
+        maxWidth: isExpanded
+          ? "1280px"
+          : window.innerWidth >= 768
+          ? "500px"
+          : "1280px",
       }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
       <div
-        className={`bg-[#F4E1F9] rounded-3xl shadow-xl transition-all duration-300 py-3`}
+        className="bg-[#F4E1F9] rounded-3xl shadow-xl transition-all duration-300 py-3"
         style={{
           boxShadow: "0 4px 14px rgba(0, 125, 252, 0.3)",
           fontFamily: "Poppins, sans-serif",
         }}
       >
-        <div
-          className={`container mx-auto flex justify-between items-center relative ${
-            isExpanded ? "px-4" : "px-0"
-          }`}
-        >
+        <div className="container mx-auto px-4 flex justify-between items-center relative">
           {/* Render different logo sections based on screen size */}
           {renderMobileLogo()}
           {renderDesktopLogo()}
