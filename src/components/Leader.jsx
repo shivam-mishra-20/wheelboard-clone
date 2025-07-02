@@ -20,7 +20,7 @@ const DesktopView = () => {
     <section className="py-16 font-poppins">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-2">
-          Meet <span className="text-blue-600">Our Leader</span>
+          Meet <span className="text-[#0052CC]">Our Leader</span>
         </h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
           The experts behind Wheelboard's success story.
@@ -40,18 +40,18 @@ const DesktopView = () => {
               <h3 className="text-xl font-semibold text-gray-900 mt-2">
                 Saloni Kumari
               </h3>
-              <p className="text-orange-500 font-medium mb-4">
+              <p className="text-[#FF6D1B] font-medium mb-4">
                 Co-founder & CEO
               </p>
               <div className="text-sm text-gray-800 bg-white/80 shadow-inner px-4 py-3 rounded-xl border border-gray-100">
                 Building an ecosystem <br />
                 <span className="font-semibold text-gray-900">
                   'grounded in{" "}
-                  <span className="text-blue-600">Empowerment</span>,<br />
-                  driven by <span className="text-blue-600">Efficiency</span>,
+                  <span className="text-[#0052CC]">Empowerment</span>,<br />
+                  driven by <span className="text-[#0052CC]">Efficiency</span>,
                   <br />
                   united by{" "}
-                  <span className="text-blue-600">Shared Success'</span>
+                  <span className="text-[#FF6D1B]">Shared Success'</span>
                 </span>
               </div>
               <div className="flex justify-center gap-4 mt-4">
@@ -60,7 +60,7 @@ const DesktopView = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-blue-700 hover:text-blue-900 text-xl"
+                  className="text-[#0052CC] hover:text-[#FF6D1B] text-xl"
                 >
                   <FaLinkedin />
                 </a>
@@ -85,7 +85,7 @@ const DesktopView = () => {
             </h4>
             <p className="text-gray-700 mb-4">
               As the co-founder of{" "}
-              <span className="text-orange-600 font-semibold">
+              <span className="text-[#FF6D1B] font-semibold">
                 Wheelboard Solutions
               </span>
               , Saloni has a vision to transforming transport Industry. Her
@@ -99,7 +99,7 @@ const DesktopView = () => {
             </p>
             <p className="text-gray-800 mb-1">
               At{" "}
-              <span className="text-orange-600 font-semibold">Wheelboard</span>,
+              <span className="text-[#FF6D1B] font-semibold">Wheelboard</span>,
               we're building an ecosystem where every stakeholder thrives."
             </p>
             <p className="text-gray-800 font-medium mt-4">
@@ -121,7 +121,7 @@ const MobileView = () => {
     <section className="py-12 font-poppins">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-2">
-          Meet <span className="text-blue-600">Our Leader</span>
+          Meet <span className="text-[#0052CC]">Our Leader</span>
         </h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
           The experts behind Wheelboard's success story.
@@ -141,16 +141,16 @@ const MobileView = () => {
               <h3 className="text-xl font-semibold text-gray-900 mt-2">
                 Saloni Kumari
               </h3>
-              <p className="text-orange-500 font-medium mb-3">
+              <p className="text-[#FF6D1B] font-medium mb-3">
                 Co-founder & CEO
               </p>
               <div className="text-sm text-gray-800 bg-white/80 shadow-inner px-4 py-3 rounded-xl border border-gray-100 mb-3">
                 Building an ecosystem <br />
                 <span className="font-semibold text-gray-900">
                   'grounded in{" "}
-                  <span className="text-blue-600">Empowerment</span>, driven by{" "}
-                  <span className="text-blue-600">Efficiency</span>, united by{" "}
-                  <span className="text-blue-600">Shared Success'</span>
+                  <span className="text-[#0052CC]">Empowerment</span>, driven by{" "}
+                  <span className="text-[#0052CC]">Efficiency</span>, united by{" "}
+                  <span className="text-[#FF6D1B]">Shared Success'</span>
                 </span>
               </div>
               <div className="flex justify-center gap-4 mt-3">
@@ -159,7 +159,7 @@ const MobileView = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-blue-700 hover:text-blue-900 text-xl"
+                  className="text-[#0052CC] hover:text-[#FF6D1B] text-xl"
                 >
                   <FaLinkedin />
                 </a>
@@ -184,7 +184,7 @@ const MobileView = () => {
             </h4>
             <p className="text-gray-700 text-sm mb-3">
               As the co-founder of{" "}
-              <span className="text-orange-600 font-semibold">
+              <span className="text-[#FF6D1B] font-semibold">
                 Wheelboard Solutions
               </span>
               , Saloni has a vision to transforming transport Industry. Her
@@ -197,7 +197,7 @@ const MobileView = () => {
             </p>
             <p className="text-gray-800 text-sm mb-2">
               At{" "}
-              <span className="text-orange-600 font-semibold">Wheelboard</span>,
+              <span className="text-[#FF6D1B] font-semibold">Wheelboard</span>,
               we're building an ecosystem where every stakeholder thrives."
             </p>
             <p className="text-gray-800 font-medium text-sm mt-3">

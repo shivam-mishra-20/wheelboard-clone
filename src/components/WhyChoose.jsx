@@ -59,7 +59,7 @@ const WhyChoose = () => {
       {/* Heading */}
       <div className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Why Choose <span className="text-[#4A90E2]">Wheelboard</span> ?
+          Why Choose <span className="text-[#0052CC]">Wheelboard</span> ?
         </h2>
         <p className="text-lg md:text-xl font-bold text-gray-700 mt-2">
           Smart Operations, Sustainable growth, Greater Value
@@ -86,12 +86,12 @@ const WhyChoose = () => {
             {/* Left Side (Text) */}
             <div className="w-1/2 p-5 flex flex-col justify-center group">
               <Icon
-                className="text-[#4A90E2] w-7 h-7 mb-3 transition-all duration-300 
-                              group-hover:text-blue-600 group-hover:scale-110 transform"
+                className="text-[#0052CC] w-7 h-7 mb-3 transition-all duration-300 
+                              group-hover:text-[#FF6D1B] group-hover:scale-110 transform"
               />
               <h3
                 className="text-[15px] font-semibold text-gray-900 mb-1 leading-snug 
-                             transition-colors duration-300 group-hover:text-blue-800"
+                             transition-colors duration-300 group-hover:text-[#0052CC]"
               >
                 {title}
               </h3>
@@ -136,8 +136,8 @@ const WhyChoose = () => {
           transition: box-shadow 0.3s ease-in-out;
         }
         .hover-colored-shadow:hover {
-          box-shadow: 0 10px 25px -5px rgba(74, 144, 226, 0.3),
-            0 8px 10px -6px rgba(74, 144, 226, 0.2);
+          box-shadow: 0 10px 25px -5px rgba(0, 82, 204, 0.3),
+            0 8px 10px -6px rgba(0, 82, 204, 0.2);
         }
       `}</style>
     </section>

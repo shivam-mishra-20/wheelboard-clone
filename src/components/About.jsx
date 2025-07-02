@@ -4,20 +4,20 @@ import { motion } from "framer-motion";
 const aboutData = [
   {
     img: "https://media.istockphoto.com/id/517416991/photo/truck-driver.jpg?s=612x612&w=0&k=20&c=e1sbLN1Xof1cibXNfRWwQGBk0Ji0FIUaXRFrtUZ7Nho=", // Driver in truck cab
-    bgColor: "from-blue-500 to-blue-600",
-    dotColor: "bg-blue-400",
+    bgColor: "from-[#0052CC] to-[#0052CC]",
+    dotColor: "bg-[#0052CC]",
     dotPosition: "top-4 right-4",
   },
   {
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80", // Analytics dashboard
-    bgColor: "from-orange-400 to-orange-500",
-    dotColor: "bg-blue-400",
+    bgColor: "from-[#FF6D1B] to-[#FF6D1B]",
+    dotColor: "bg-[#0052CC]",
     dotPosition: "top-4 left-4",
   },
   {
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqXW-_g3LE3jWjvvOnQPKEsRlOQFEEwOY44w&s", // Mechanic working on truck tire
-    bgColor: "from-blue-500 to-blue-600",
-    dotColor: "bg-orange-400",
+    bgColor: "from-[#0052CC] to-[#0052CC]",
+    dotColor: "bg-[#FF6D1B]",
     dotPosition: "top-4 right-4",
   },
   {
@@ -70,7 +70,7 @@ const About = () => {
         {/* Heading */}
         <div className="relative z-10 max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            About <span className="text-blue-600">Us</span>
+            About <span className="text-[#0052CC]">Us</span>
           </h2>
           <p className="text-gray-700 font-medium leading-relaxed">
             At <strong>Wheelboard</strong>, We are committed to transform the
@@ -131,7 +131,7 @@ const About = () => {
                               flex flex-col justify-end p-5 cursor-pointer group"
                 >
                   <h4
-                    className="text-[#FF6B35] text-m font-extrabold transform translate-y-4 opacity-0 
+                    className="text-[#FF6D1B] text-m font-extrabold transform translate-y-4 opacity-0 
                               group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100 ease-out"
                   >
                     {
@@ -146,7 +146,7 @@ const About = () => {
                     }
                   </h4>
                   <p
-                    className="text-[#FF6B35] text-sm font-semibold transform translate-y-4 opacity-0 
+                    className="text-[#FF6D1B] text-sm font-semibold transform translate-y-4 opacity-0 
                               group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100 ease-out"
                   >
                     {

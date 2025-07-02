@@ -98,8 +98,8 @@ const Header = () => {
               href={`#${link.id}`}
               className={`font-medium text-sm relative font-poppins tracking-wide group ${
                 activeLink === link.id
-                  ? "text-purple-900"
-                  : "text-gray-700 hover:text-purple-900"
+                  ? "text-[#FF6D1B]"
+                  : "text-gray-700 hover:text-[#0052CC]"
               } transition-colors duration-300`}
               onClick={() => setActiveLink(link.id)}
               whileHover={{ y: -2 }}
@@ -110,7 +110,7 @@ const Header = () => {
               {activeLink === link.id && (
                 <motion.span
                   layoutId="activeIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-900 rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FF6D1B] rounded-full"
                   initial={{ opacity: 0, width: 0 }}
                   animate={{ opacity: 1, width: "100%" }}
                   transition={{ duration: 0.3 }}
@@ -118,7 +118,7 @@ const Header = () => {
               )}
               {/* Hover underline */}
               <span
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-400 rounded-full pointer-events-none transition-all duration-200 scale-x-0 group-hover:scale-x-100"
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#0052CC] rounded-full pointer-events-none transition-all duration-200 scale-x-0 group-hover:scale-x-100"
                 aria-hidden="true"
               />
             </motion.a>
@@ -134,7 +134,7 @@ const Header = () => {
       {/* Hamburger Toggle Button with enhanced styling */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-purple-900 hover:text-purple-700 focus:outline-none transition-transform duration-300 p-2 rounded-lg hover:bg-purple-100/50"
+        className="text-[#0052CC] hover:text-[#FF6D1B] focus:outline-none transition-transform duration-300 p-2 rounded-lg hover:bg-[#0052CC]/10"
         aria-label="Toggle menu"
       >
         <motion.div

@@ -160,13 +160,14 @@ const Industries = () => {
     controls.start({ x: 0 });
   };
 
+  // Update service card background colors
   const serviceCards = [
     {
       title: "Shipment",
       icon: <FaTruck className="text-white text-3xl" />,
       description:
         "We offer agile, tech-enabled logistics solutions — ensuring on-time delivery, rapid restocking and scalable distribution.",
-      bgColor: "from-blue-600 to-blue-700",
+      bgColor: "from-[#0052CC] to-[#0052CC]",
       bgImage: "/red-truck.png",
     },
     {
@@ -174,7 +175,7 @@ const Industries = () => {
       icon: <FaHardHat className="text-white text-3xl" />,
       description:
         "From raw materials to heavy machinery, we deliver tailored transportation for real estate developers, contractors, and infrastructure projects.",
-      bgColor: "from-orange-500 to-orange-600",
+      bgColor: "from-[#FF6D1B] to-[#FF6D1B]",
       bgImage: "/bulldozer.png",
     },
     {
@@ -182,7 +183,7 @@ const Industries = () => {
       icon: <FaMountain className="text-white text-3xl" />,
       description:
         "We manage the secure, high-capacity transport of ores, mining equipment, and hazardous materials across rugged terrains.",
-      bgColor: "from-green-500 to-green-600",
+      bgColor: "from-[#333333] to-[#333333]",
       bgImage: "/mining-truck.jpg",
     },
   ];
@@ -264,7 +265,7 @@ const Industries = () => {
                 key={index}
                 className={`rounded-full transition-all duration-300 ${
                   currentIndex === index
-                    ? "w-[8px] h-[8px] bg-blue-500"
+                    ? "w-[8px] h-[8px] bg-[#0052CC]"
                     : "w-[6px] h-[6px] bg-gray-300"
                 }`}
                 onClick={() => {
@@ -287,7 +288,7 @@ const Industries = () => {
       <div className="py-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Industries <span className="text-blue-500">we Serve</span>
+            Industries <span className="text-[#0052CC]">we Serve</span>
           </h2>
           <div className="max-w-2xl mx-auto mt-6">
             <p className="text-xl md:text-2xl font-semibold text-center">
@@ -480,7 +481,7 @@ const Industries = () => {
                     key={slide.id}
                     className={`rounded-full transition-all duration-300 ${
                       currentIndex === index
-                        ? "w-[10px] h-[10px] bg-blue-500 shadow-md"
+                        ? "w-[10px] h-[10px] bg-[#0052CC] shadow-md"
                         : "w-[8px] h-[8px] bg-gray-300"
                     }`}
                     onClick={() => {

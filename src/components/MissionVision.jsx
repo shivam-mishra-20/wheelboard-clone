@@ -24,15 +24,15 @@ const MissionVisionSection = () => {
     >
       {/* Glassy background effect */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0052CC]/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6D1B]/20 rounded-full blur-3xl"></div>
       </div>
 
       {/* Title */}
       <div className="relative z-10 text-center mb-16">
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-          Our <span className="text-blue-400">Mission</span> and{" "}
-          <span className="text-blue-600">Vision</span>
+          Our <span className="text-[#0052CC]">Mission</span> and{" "}
+          <span className="text-[#FF6D1B]">Vision</span>
         </h2>
         <p className="mt-2 text-gray-600 text-sm sm:text-base">
           Guided by clear principles to transform the transport industry.

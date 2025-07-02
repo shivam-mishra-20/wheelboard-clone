@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase/config"; // Make sure this path matches your firebase config export
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -8,6 +10,59 @@ const fadeInUp = {
 };
 
 export default function ContactSection() {
+  // Form state management
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', 'error'
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Format the date for the document ID
+      const today = new Date();
+      const dateString = today.toISOString().split("T")[0]; // YYYY-MM-DD format
+      const docId = `${formData.name.replace(/\s+/g, "_")}_${dateString}`;
+
+      // Add to Firestore collection "contact_messages"
+      await addDoc(collection(db, "contact_messages"), {
+        ...formData,
+        timestamp: serverTimestamp(),
+      });
+
+      // Reset form and show success
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+      });
+      setSubmitStatus("success");
+    } catch (error) {
+      console.error("Error sending message: ", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-white font-poppins">
       <div className="container mx-auto px-6 lg:px-8">
@@ -46,7 +101,7 @@ export default function ContactSection() {
             <div className="space-y-6 mb-8">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-white/50 rounded-full">
-                  <FiPhone className="w-6 h-6 text-blue-600" />
+                  <FiPhone className="w-6 h-6 text-[#0052CC]" />
                 </div>
                 <div>
                   <div className="text-gray-800 font-medium">Phone</div>
@@ -56,7 +111,7 @@ export default function ContactSection() {
 
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-white/50 rounded-full">
-                  <FiMail className="w-6 h-6 text-orange-500" />
+                  <FiMail className="w-6 h-6 text-[#FF6D1B]" />
                 </div>
                 <div>
                   <div className="text-gray-800 font-medium">Email</div>
@@ -98,6 +153,7 @@ export default function ContactSection() {
 
           {/* 📨 Send Us a Message */}
           <motion.form
+            onSubmit={handleSubmit}
             className="flex-1 backdrop-blur-xl bg-white/30 rounded-2xl p-8 shadow-lg grid gap-4"
             initial="hidden"
             whileInView="visible"
@@ -108,31 +164,92 @@ export default function ContactSection() {
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">
               Send Us a Message
             </h3>
+
+            {/* Form Status Messages */}
+            {submitStatus === "success" && (
+              <div className="bg-green-50 text-green-800 p-3 rounded-lg">
+                Thank you! Your message has been sent successfully.
+              </div>
+            )}
+            {submitStatus === "error" && (
+              <div className="bg-red-50 text-red-800 p-3 rounded-lg">
+                Oops! There was a problem sending your message. Please try
+                again.
+              </div>
+            )}
+
+            {/* Form Fields */}
             <input
               type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               placeholder="Your Name"
+              required
               className="px-4 py-3 rounded-lg bg-white/60 placeholder-gray-500 focus:bg-white focus:outline-none"
             />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="Email Address"
+              required
               className="px-4 py-3 rounded-lg bg-white/60 placeholder-gray-500 focus:bg-white focus:outline-none"
             />
             <input
               type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleInputChange}
               placeholder="Company"
               className="px-4 py-3 rounded-lg bg-white/60 placeholder-gray-500 focus:bg-white focus:outline-none"
             />
             <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
               rows="4"
               placeholder="Message"
+              required
               className="px-4 py-3 rounded-lg bg-white/60 placeholder-gray-500 focus:bg-white focus:outline-none resize-none"
             />
             <button
               type="submit"
-              className="mt-2 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors duration-300"
+              disabled={isSubmitting}
+              className={`mt-2 py-3 ${
+                isSubmitting
+                  ? "bg-gray-400"
+                  : "bg-[#FF6D1B] hover:bg-[#FF6D1B]/90"
+              } text-white rounded-lg font-medium transition-colors duration-300 flex justify-center items-center`}
             >
-              Send Message
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </button>
           </motion.form>
         </div>

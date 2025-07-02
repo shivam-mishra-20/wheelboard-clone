@@ -175,7 +175,7 @@ const MobileHeroView = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="block font-extrabold text-[2rem] xs:text-[2.2rem] leading-[1.1] tracking-[-0.03em] text-[#6f38ff] mt-1 mb-1"
+              className="block font-extrabold text-[2rem] xs:text-[2.2rem] leading-[1.1] tracking-[-0.03em] text-[#0052CC] mt-1 mb-1"
             >
               One Tap Away
             </motion.span>
@@ -212,7 +212,7 @@ const MobileHeroView = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               href="#download"
-              className="px-6 py-2.5 rounded-lg font-semibold transition text-white bg-gradient-to-r from-[#6f6bff] via-[#5B2BE0] to-[#e766fe] text-center text-sm"
+              className="px-6 py-2.5 rounded-lg font-semibold transition text-white bg-gradient-to-r from-[#0052CC] via-[#0052CC] to-[#FF6D1B] text-center text-sm"
               style={{ minWidth: 150 }}
             >
               Download the App
@@ -221,37 +221,16 @@ const MobileHeroView = () => {
             <motion.a
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 4px 15px rgba(91,43,224,0.15)",
+                boxShadow: "0 4px 15px rgba(0, 82, 204, 0.15)",
               }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               href="#demo"
-              className="px-6 py-2.5 rounded-lg font-semibold border-2 border-[#5B2BE0] text-[#5B2BE0] bg-transparent transition text-center text-sm"
+              className="px-6 py-2.5 rounded-lg font-semibold border-2 border-[#0052CC] text-[#0052CC] bg-transparent transition text-center text-sm"
               style={{ minWidth: 150 }}
             >
               Watch Demo
             </motion.a>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="flex justify-between w-full mt-4 pt-4 border-t border-gray-100"
-          >
-            <div className="text-center">
-              <p className="text-xs text-gray-500">Active Users</p>
-              <p className="font-bold text-purple-600 text-lg">10K+</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-gray-500">Fleet Efficiency</p>
-              <p className="font-bold text-purple-600 text-lg">+40%</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-gray-500">Countries</p>
-              <p className="font-bold text-purple-600 text-lg">25+</p>
-            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -292,7 +271,7 @@ const DesktopHeroView = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="block font-extrabold text-[2.3rem] xs:text-[2.6rem] sm:text-[3rem] md:text-[3.2rem] leading-[1.1] tracking-[-0.03em] text-[#6f38ff] mt-2 mb-2"
+              className="block font-extrabold text-[2.3rem] xs:text-[2.6rem] sm:text-[3rem] md:text-[3.2rem] leading-[1.1] tracking-[-0.03em] text-[#0052CC] mt-2 mb-2"
             >
               One Tap Away
             </motion.span>
@@ -323,12 +302,12 @@ const DesktopHeroView = () => {
             <motion.a
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 6px 24px rgba(111,107,255,0.25)",
+                boxShadow: "0 6px 24px rgba(0, 82, 204, 0.25)",
               }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               href="#download"
-              className="px-8 py-3 rounded-lg font-semibold transition text-white bg-gradient-to-r from-[#6f6bff] via-[#5B2BE0] to-[#e766fe] shadow-[0_4px_24px_0_rgba(111,107,255,0.18)] text-center"
+              className="px-8 py-3 rounded-lg font-semibold transition text-white bg-gradient-to-r from-[#0052CC] via-[#0052CC] to-[#FF6D1B] shadow-[0_4px_24px_0_rgba(0,82,204,0.18)] text-center"
               style={{ minWidth: 150 }}
             >
               Download the App
@@ -336,12 +315,12 @@ const DesktopHeroView = () => {
             <motion.a
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 4px 20px rgba(91,43,224,0.12)",
+                boxShadow: "0 4px 20px rgba(0, 82, 204, 0.12)",
               }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               href="#demo"
-              className="px-8 py-3 rounded-lg font-semibold border-2 border-[#5B2BE0] text-[#5B2BE0] bg-transparent transition shadow-[0_4px_24px_0_rgba(111,107,255,0.08)] text-center"
+              className="px-8 py-3 rounded-lg font-semibold border-2 border-[#0052CC] text-[#0052CC] bg-transparent transition shadow-[0_4px_24px_0_rgba(0,82,204,0.08)] text-center"
               style={{ minWidth: 150 }}
             >
               Watch Demo
