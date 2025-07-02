@@ -9,7 +9,7 @@ const fadeInUp = {
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-gray-100 font-poppins">
+    <section id="contact" className="py-20 bg-white font-poppins">
       <div className="container mx-auto px-6 lg:px-8">
         <motion.h2
           className="text-4xl lg:text-5xl font-semibold text-gray-900 text-center mb-6"

@@ -17,7 +17,7 @@ const Leader = () => {
 
 const DesktopView = () => {
   return (
-    <section className="py-16 bg-gray-50 font-poppins">
+    <section className="py-16 font-poppins">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-2">
           Meet <span className="text-blue-600">Our Leader</span>
@@ -118,7 +118,7 @@ const DesktopView = () => {
 
 const MobileView = () => {
   return (
-    <section className="py-12 bg-gray-50 font-poppins">
+    <section className="py-12 font-poppins">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-2">
           Meet <span className="text-blue-600">Our Leader</span>

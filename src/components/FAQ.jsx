@@ -54,7 +54,7 @@ const FAQ = () => {
     faqsCol.map((faq, idx) => (
       <div
         key={idx}
-        className="rounded-2xl bg-white/30 shadow-2xl backdrop-blur-lg border border-white/40 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(255,94,95,0.2)] mb-6"
+        className="rounded-2xl bg-white/40 shadow-2xl backdrop-blur-lg border border-white/40 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(255,94,95,0.2)] mb-6"
         style={{
           boxShadow:
             "0 8px 32px 0 rgba(255,94,95,0.15), 0 1.5px 4px 0 rgba(0,0,0,0.07)",
@@ -93,7 +93,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="py-20 bg-gradient-to-br from-[#fff5f5] via-white/80 to-[#ffeaea] min-h-screen font-poppins"
+      className="py-20 bg-white min-h-screen font-poppins"
       style={{
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",

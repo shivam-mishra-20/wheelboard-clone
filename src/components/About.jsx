@@ -67,13 +67,6 @@ const About = () => {
       className="relative py-20 bg-white overflow-hidden min-h-screen flex items-center justify-center"
     >
       <div className="w-full max-w-7xl mx-auto px-4">
-        {/* Soft gradient background blobs */}
-        <div className="absolute z-0 inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute w-[700px] h-[700px] rounded-full -top-20 -left-20 bg-blue-50/60 blur-3xl"></div>
-          <div className="absolute w-[800px] h-[800px] rounded-full -bottom-40 -right-40 bg-green-50/60 blur-3xl"></div>
-          <div className="absolute w-[700px] h-[700px] rounded-full top-1/2 left-1/3 bg-purple-50/50 blur-3xl"></div>
-        </div>
-
         {/* Heading */}
         <div className="relative z-10 max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -186,37 +179,6 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Added company values section */}
-        <motion.div
-          className="relative z-10 max-w-4xl mx-auto mt-20 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: false }}
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">Our Values</h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              "Innovation",
-              "Sustainability",
-              "Reliability",
-              "Collaboration",
-              "Excellence",
-            ].map((value, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-white px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100"
-                whileHover={{ scale: 1.05, y: -5 }}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <span className="text-blue-600 font-medium">{value}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
