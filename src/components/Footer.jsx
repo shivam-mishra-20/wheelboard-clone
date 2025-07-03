@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaLinkedin,
@@ -7,8 +7,30 @@ import {
   FaFacebook,
   FaTwitter,
 } from "react-icons/fa";
+import ContactFormModal from "./ContactFormModal";
 
 const Footer = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  // Social media links
+  const socialLinks = {
+    linkedin: "https://www.linkedin.com/company/wheelboard",
+    instagram: "https://www.instagram.com/wheelboard",
+    whatsapp: "https://wa.me/+919876543210", // Replace with actual number
+    facebook: "https://www.facebook.com/wheelboard",
+    twitter: "https://twitter.com/wheelboard",
+  };
+
+  // Navigation link handlers
+  const handleNavigation = (path) => {
+    // Using window.location for external links and anchor links
+    if (path.startsWith("http")) {
+      window.open(path, "_blank");
+    } else {
+      window.location.href = path;
+    }
+  };
+
   return (
     <footer className="bg-[#272627] text-white font-poppins py-12 px-6 lg:px-16 rounded-t-4xl">
       <div className="max-w-[1200px] mx-auto">
@@ -35,13 +57,15 @@ const Footer = () => {
 
               <div className="flex space-x-4 mb-8">
                 {[
-                  { icon: FaLinkedin, href: "#" },
-                  { icon: FaInstagram, href: "#" },
-                  { icon: FaWhatsapp, href: "#" },
+                  { icon: FaLinkedin, href: socialLinks.linkedin },
+                  { icon: FaInstagram, href: socialLinks.instagram },
+                  { icon: FaWhatsapp, href: socialLinks.whatsapp },
                 ].map((social, i) => (
                   <motion.a
                     key={i}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 flex items-center justify-center bg-[#333333] hover:bg-[#444444] rounded-md transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -64,9 +88,12 @@ const Footer = () => {
                   type="text"
                   placeholder="Have more query? Connect with us!"
                   className="w-full py-3 pl-5 pr-32 rounded-full bg-[#393839] placeholder-gray-400 text-gray-200 text-base focus:outline-none"
+                  readOnly
+                  onClick={() => setIsContactModalOpen(true)}
                 />
 
                 <button
+                  onClick={() => setIsContactModalOpen(true)}
                   className="absolute w-30 right-1 top-1 bottom-1 px-5 text-white text-sm font-medium rounded-full transition-all"
                   style={{
                     background:
@@ -86,13 +113,22 @@ const Footer = () => {
               <div>
                 <h5 className="text-base font-medium mb-4">Getting Started</h5>
                 <ul className="space-y-3 text-sm text-gray-300">
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/support")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Support
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/help")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Help
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/articles")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Article
                   </li>
                 </ul>
@@ -102,16 +138,28 @@ const Footer = () => {
               <div>
                 <h5 className="text-base font-medium mb-4">Social</h5>
                 <ul className="space-y-3 text-sm text-gray-300">
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation(socialLinks.instagram)}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Instagram
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation(socialLinks.linkedin)}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     LinkedIn
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation(socialLinks.facebook)}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Facebook
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation(socialLinks.twitter)}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Twitter
                   </li>
                 </ul>
@@ -121,10 +169,16 @@ const Footer = () => {
               <div>
                 <h5 className="text-base font-medium mb-4">Legal</h5>
                 <ul className="space-y-3 text-sm text-gray-300">
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/terms")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Terms and Condition
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/privacy")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Privacy Policy
                   </li>
                 </ul>
@@ -134,16 +188,28 @@ const Footer = () => {
               <div>
                 <h5 className="text-base font-medium mb-4">Services</h5>
                 <ul className="space-y-3 text-sm text-gray-300">
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/services/tracking")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Shipment Tracking
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/services/routes")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Route Tracking
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/services/freight")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Freight Management
                   </li>
-                  <li className="hover:text-white cursor-pointer transition-colors duration-200">
+                  <li
+                    onClick={() => handleNavigation("/services/analytics")}
+                    className="hover:text-white cursor-pointer transition-colors duration-200"
+                  >
                     Real Time Analysis
                   </li>
                 </ul>
@@ -157,6 +223,12 @@ const Footer = () => {
           Wheelboard 2024 © All Rights Reserved
         </p>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactFormModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </footer>
   );
 };

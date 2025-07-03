@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/config"; // Make sure this path matches your firebase config export
 
 const fadeInUp = {
@@ -41,8 +41,8 @@ export default function ContactSection() {
       const dateString = today.toISOString().split("T")[0]; // YYYY-MM-DD format
       const docId = `${formData.name.replace(/\s+/g, "_")}_${dateString}`;
 
-      // Add to Firestore collection "contact_messages"
-      await addDoc(collection(db, "contact_messages"), {
+      // Use setDoc instead of addDoc to specify the document ID
+      await setDoc(doc(db, "contact_messages", docId), {
         ...formData,
         timestamp: serverTimestamp(),
       });

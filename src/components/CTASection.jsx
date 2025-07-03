@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import ContactFormModal from "./ContactFormModal";
 
 const CTASection = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const handleOpenContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
   const renderDesktopView = () => {
     return (
       <section className="relative bg-[#1E3A8A] rounded-4xl p-8 md:p-10 text-white font-poppins shadow-xl mb-16 h-[240px] md:h-[220px] max-w-[75%] mx-auto z-20 hidden sm:block">
@@ -39,7 +46,10 @@ const CTASection = () => {
               Join countless other businesses that have streamlined their
               logistics with our cutting-edge solution
             </p>
-            <button className="mt-5 px-6 py-2 bg-[#FF6B35] hover:bg-orange-600 text-white rounded-full text-sm font-medium shadow-md transition-all duration-300">
+            <button
+              onClick={handleOpenContactModal}
+              className="mt-5 px-6 py-2 bg-[#FF6B35] hover:bg-orange-600 text-white rounded-full text-sm font-medium shadow-md transition-all duration-300"
+            >
               Contact us
             </button>
           </motion.div>
@@ -88,7 +98,10 @@ const CTASection = () => {
               Join countless other businesses that have streamlined their
               logistics with our cutting-edge solution
             </p>
-            <button className="mt-4 px-6 py-2 bg-[#FF6B35] hover:bg-orange-600 text-white rounded-full text-sm font-medium shadow-md transition-all duration-300">
+            <button
+              onClick={handleOpenContactModal}
+              className="mt-4 px-6 py-2 bg-[#FF6B35] hover:bg-orange-600 text-white rounded-full text-sm font-medium shadow-md transition-all duration-300"
+            >
               Contact us
             </button>
           </motion.div>
@@ -109,6 +122,10 @@ const CTASection = () => {
     <>
       {renderDesktopView()}
       {renderMobileView()}
+      <ContactFormModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </>
   );
 };
