@@ -163,18 +163,18 @@ const Industries = () => {
   // Update service card background colors
   const serviceCards = [
     {
-      title: "Shipment",
+      title: "Logistics",
       icon: <FaTruck className="text-white text-3xl" />,
       description:
-        "We offer agile, tech-enabled logistics solutions — ensuring on-time delivery, rapid restocking and scalable distribution.",
+        "Unlock full potential of your Fleet with Wheelboard smart dashboard. Plan, Grow Sustainably- all without any initial investment.",
       bgColor: "from-[#0052CC] to-[#0052CC]",
       bgImage: "/red-truck.png",
     },
     {
       title: "Construction",
-      icon: <FaHardHat className="text-white text-3xl" />,
+      icon: <FaHardHat className="text-white font-bold text-3xl" />,
       description:
-        "From raw materials to heavy machinery, we deliver tailored transportation for real estate developers, contractors, and infrastructure projects.",
+        "Drive Efficiency. Enhanced Safety. Optimize Asset Utilization",
       bgColor: "from-[#FF6D1B] to-[#FF6D1B]",
       bgImage: "/bulldozer.png",
     },
@@ -182,7 +182,7 @@ const Industries = () => {
       title: "Mining",
       icon: <FaMountain className="text-white text-3xl" />,
       description:
-        "We manage the secure, high-capacity transport of ores, mining equipment, and hazardous materials across rugged terrains.",
+        "Empower your fleet operations with the right skills and actionable, data-driven insights.",
       bgColor: "from-[#333333] to-[#333333]",
       bgImage: "/mining-truck.jpg",
     },

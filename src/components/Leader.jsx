@@ -56,7 +56,7 @@ const DesktopView = () => {
               </div>
               <div className="flex justify-center gap-4 mt-4">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/saloni-singh-8571621ba/#:~:text=www.linkedin.com/in/saloni-singh-8571621ba"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -65,7 +65,7 @@ const DesktopView = () => {
                   <FaLinkedin />
                 </a>
                 <a
-                  href="mailto:saloni@wheelboard.com"
+                  href="mailto:Saloni@wheelboard.in"
                   aria-label="Email"
                   className="text-gray-600 hover:text-gray-900 text-xl"
                 >
@@ -134,7 +134,7 @@ const MobileView = () => {
               <div className="flex justify-center items-center">
                 <img
                   src="/profile-pic.png"
-                  alt="Saloni Kumari"
+                  alt="Saloni Singh"
                   className="w-30 h-30 rounded-full object-fill"
                 />
               </div>
@@ -155,7 +155,7 @@ const MobileView = () => {
               </div>
               <div className="flex justify-center gap-4 mt-3">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/saloni-singh-8571621ba/#:~:text=www.linkedin.com/in/saloni-singh-8571621ba"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -164,7 +164,7 @@ const MobileView = () => {
                   <FaLinkedin />
                 </a>
                 <a
-                  href="mailto:saloni@wheelboard.com"
+                  href="mailto:Saloni@wheelboard.in"
                   aria-label="Email"
                   className="text-gray-600 hover:text-gray-900 text-xl"
                 >
