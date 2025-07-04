@@ -224,6 +224,16 @@ const Footer = () => {
         </p>
       </div>
 
+      {/* Admin Login Link */}
+      <div className="text-center mb-4">
+        <a
+          href="/admin/login"
+          className="text-gray-400 hover:text-[#FF6D1B] text-xs transition-colors duration-300"
+        >
+          Admin Login
+        </a>
+      </div>
+
       {/* Contact Form Modal */}
       <ContactFormModal
         isOpen={isContactModalOpen}

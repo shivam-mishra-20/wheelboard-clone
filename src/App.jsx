@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import WhyChoose from "./components/WhyChoose";
@@ -13,6 +13,10 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CTASection from "./components/CTASection";
 import LoadingScreen from "./components/LoadingScreen";
+import Login from "./components/admin/Login";
+import Dashboard from "./components/admin/Dashboard";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 import "./App.css";
 
@@ -40,28 +44,65 @@ function App() {
     };
   }, [loading]);
 
+  // Check if current path is admin route
+  const isAdminRoute = (pathname) => {
+    return pathname.startsWith("/admin");
+  };
+
+  // Get current location
+  const pathname = window.location.pathname;
+
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen">
-        {loading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
+      <AuthProvider>
+        <div className="relative min-h-screen">
+          {loading && (
+            <LoadingScreen onLoadingComplete={handleLoadingComplete} />
+          )}
 
-        <div style={{ visibility: loading ? "hidden" : "visible" }}>
-          <Header />
-          <main>
-            <Hero />
-            <WhyChoose />
-            <About />
-            <Services />
-            <MissionVision />
-            <Leader />
-            <Industries />
-            <FAQ />
-            <Contact />
-            <CTASection />
-          </main>
-          <Footer />
+          <div style={{ visibility: loading ? "hidden" : "visible" }}>
+            <Routes>
+              {/* Admin Routes */}
+              <Route path="/admin/login" element={<Login />} />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin"
+                element={<Navigate to="/admin/login" replace />}
+              />
+
+              {/* Main Website */}
+              <Route
+                path="*"
+                element={
+                  <>
+                    <Header />
+                    <main>
+                      <Hero />
+                      <WhyChoose />
+                      <About />
+                      <Services />
+                      <MissionVision />
+                      <Leader />
+                      <Industries />
+                      <FAQ />
+                      <Contact />
+                      <CTASection />
+                    </main>
+                    <Footer />
+                  </>
+                }
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
