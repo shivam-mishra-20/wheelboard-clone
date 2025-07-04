@@ -33,12 +33,12 @@ const DesktopView = () => {
               <div className="flex justify-center items-center">
                 <img
                   src="/profile-pic.png"
-                  alt="Saloni Kumari"
+                  alt="Saloni Singh"
                   className="w-30 h-30 rounded-full object-fill"
                 />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mt-2">
-                Saloni Kumari
+                Saloni Singh
               </h3>
               <p className="text-[#FF6D1B] font-medium mb-4">
                 Co-founder & CEO
@@ -103,7 +103,7 @@ const DesktopView = () => {
               we're building an ecosystem where every stakeholder thrives."
             </p>
             <p className="text-gray-800 font-medium mt-4">
-              — Saloni Kumari
+              — Saloni Singh
               <br />
               <span className="text-gray-500 text-sm">
                 Co-founder & CEO, Wheelboard
@@ -139,7 +139,7 @@ const MobileView = () => {
                 />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mt-2">
-                Saloni Kumari
+                Saloni Singh
               </h3>
               <p className="text-[#FF6D1B] font-medium mb-3">
                 Co-founder & CEO
@@ -201,7 +201,7 @@ const MobileView = () => {
               we're building an ecosystem where every stakeholder thrives."
             </p>
             <p className="text-gray-800 font-medium text-sm mt-3">
-              — Saloni Kumari
+              — Saloni Singh
               <br />
               <span className="text-gray-500 text-xs">
                 Co-founder & CEO, Wheelboard

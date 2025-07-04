@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   FaLinkedin,
   FaInstagram,
@@ -11,6 +12,7 @@ import ContactFormModal from "./ContactFormModal";
 
 const Footer = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Social media links
   const socialLinks = {
@@ -26,7 +28,11 @@ const Footer = () => {
     // Using window.location for external links and anchor links
     if (path.startsWith("http")) {
       window.open(path, "_blank");
+    } else if (path.startsWith("/admin")) {
+      // Use React Router navigation for admin routes
+      navigate(path);
     } else {
+      // For other internal links
       window.location.href = path;
     }
   };
