@@ -21,7 +21,7 @@ import ProtectedRoute from "./components/admin/ProtectedRoute";
 import "./App.css";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // If you need to actually load resources before showing content
   useEffect(() => {
