@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const MobileHeroView = () => {
@@ -240,16 +240,16 @@ const MobileHeroView = () => {
 
 const DesktopHeroView = () => {
   return (
-    <div className="container mx-auto flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-12 z-20 relative flex">
+    <div className="container mx-auto flex-col-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-12 z-20 relative flex">
       {/* Left: Text + Pink Ball */}
-      <div className="w-full md:w-1/2 pt-8 md:pt-0 z-20 flex flex-col items-start text-left relative max-w-[540px] lg:ml-35 lg:mt-20">
+      <div className="w-full lg:w-1/2 pt-8 lg:pt-0 z-20 flex flex-col items-start text-left relative max-w-[540px] lg:ml-0 xl:ml-35 lg:mt-10 xl:mt-20">
         <motion.img
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 0.85, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
           src="/ball-pink.png"
           alt=""
-          className="absolute left-45 top-[-40px] -translate-x-1/2 w-[425px] h-auto z-0 pointer-events-none select-none md:w-[425px] md:top-[5px]"
+          className="absolute left-45 top-[-40px] -translate-x-1/2 w-[425px] h-auto z-0 pointer-events-none select-none lg:w-[350px] xl:w-[425px] lg:top-[15px] xl:top-[5px]"
           aria-hidden="true"
         />
         <motion.div
@@ -258,7 +258,7 @@ const DesktopHeroView = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full flex flex-col items-start text-left relative z-20"
         >
-          <h1 className="text-left text-[2.3rem] xs:text-[2.6rem] sm:text-[3rem] md:text-[3.2rem] font-extrabold leading-tight mb-2 text-[#1A1A1A] tracking-[-0.03em] relative z-10">
+          <h1 className="text-left text-[2.3rem] xs:text-[2.6rem] sm:text-[2.6rem] md:text-[2.8rem] lg:text-[3.2rem] font-extrabold leading-tight mb-2 text-[#1A1A1A] tracking-[-0.03em] relative z-10">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -338,7 +338,7 @@ const DesktopHeroView = () => {
           type: "spring",
           stiffness: 60,
         }}
-        className="w-full md:w-1/2 flex justify-center md:justify-end relative z-30 mb-0 mt-60 md:mr-30"
+        className="w-full lg:w-1/2 flex justify-center lg:justify-end relative z-30 mb-0 mt-60 lg:mt-40 xl:mt-60 lg:mr-0 xl:mr-30"
       >
         <motion.div
           whileHover={{
@@ -353,7 +353,7 @@ const DesktopHeroView = () => {
             transition={{ duration: 1.2 }}
             src="/mobile-ss.png"
             alt="App Preview"
-            className="w-[220px] xs:w-[260px] sm:w-[320px] md:w-[370px] drop-shadow-xl"
+            className="w-[220px] xs:w-[260px] sm:w-[280px] md:w-[300px] lg:w-[370px] drop-shadow-xl"
           />
 
           {/* Animated interactive elements */}
@@ -425,7 +425,7 @@ const DesktopHeroView = () => {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: -60 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="absolute left-0 top-1/4 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center"
+            className="absolute left-0 top-1/4 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center md:left-[-20px] lg:left-0"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-green-500 mr-2"></span>
             Live Tracking
@@ -435,7 +435,215 @@ const DesktopHeroView = () => {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 60 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            className="absolute right-0 bottom-1/3 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center"
+            className="absolute right-0 bottom-1/3 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center md:right-[-20px] lg:right-0"
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2"></span>
+            Real-time Data
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
+const TabletHeroView = () => {
+  return (
+    <div className="container mx-auto flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 z-20 relative flex">
+      {/* Left: Text + Pink Ball */}
+      <div className="w-full md:w-1/2 pt-8 md:pt-0 z-20 flex flex-col items-start text-left relative max-w-[540px] md:ml-0 lg:ml-35 md:mt-10 lg:mt-20">
+        <motion.img
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 0.85, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          src="/ball-pink.png"
+          alt=""
+          className="absolute left-45 top-[-40px] -translate-x-1/2 w-[425px] h-auto z-0 pointer-events-none select-none md:w-[350px] lg:w-[425px] md:top-[15px] lg:top-[5px]"
+          aria-hidden="true"
+        />
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full flex flex-col items-start text-left relative z-20"
+        >
+          <h1 className="text-left text-[2.3rem] xs:text-[2.6rem] sm:text-[2.6rem] md:text-[2.8rem] lg:text-[3.2rem] font-extrabold leading-tight mb-2 text-[#1A1A1A] tracking-[-0.03em] relative z-10">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="block"
+            >
+              Smart Logistics,
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="block font-extrabold text-[2.3rem] xs:text-[2.6rem] sm:text-[3rem] md:text-[3.2rem] leading-[1.1] tracking-[-0.03em] text-[#0052CC] mt-2 mb-2"
+            >
+              One Tap Away
+            </motion.span>
+          </h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="text-left text-[#3d3552] font-semibold text-base xs:text-lg md:text-xl mb-6 mt-2 w-200 relative z-10"
+          >
+            <span className="font-bold text-[#3d3552]">
+              Transform your fleet into a safer, efficient, and sustainable
+              ecosystem.
+            </span>
+            <br />
+            Achieve sustainable growth through{" "}
+            <span className="font-bold">Innovation, Intelligent insights</span>
+            , and <br />
+            collaborative partnerships— all in one platform.
+          </motion.p>
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="flex flex-row gap-4 w-full md:w-auto justify-start md:mt-4 relative z-10"
+          >
+            <motion.a
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 6px 24px rgba(0, 82, 204, 0.25)",
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              href="#download"
+              className="px-8 py-3 rounded-lg font-semibold transition text-white bg-gradient-to-r from-[#0052CC] via-[#0052CC] to-[#FF6D1B] shadow-[0_4px_24px_0_rgba(0,82,204,0.18)] text-center"
+              style={{ minWidth: 150 }}
+            >
+              Download the App
+            </motion.a>
+            <motion.a
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 4px 20px rgba(0, 82, 204, 0.12)",
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              href="#demo"
+              className="px-8 py-3 rounded-lg font-semibold border-2 border-[#0052CC] text-[#0052CC] bg-transparent transition shadow-[0_4px_24px_0_rgba(0,82,204,0.08)] text-center"
+              style={{ minWidth: 150 }}
+            >
+              Watch Demo
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </div>
+      {/* Right: Phone Mockup */}
+      <motion.div
+        initial={{ opacity: 0, y: 60, rotate: 10 }}
+        animate={{ opacity: 1, y: -50, rotate: 0 }}
+        transition={{
+          duration: 1,
+          delay: 0.5,
+          type: "spring",
+          stiffness: 60,
+        }}
+        className="w-full md:w-1/2 flex justify-center md:justify-end relative z-30 mb-0 mt-60 md:mt-40 lg:mt-60 md:mr-0 lg:mr-30"
+      >
+        <motion.div
+          whileHover={{
+            y: -15,
+            transition: { duration: 0.5, ease: "easeOut" },
+          }}
+          className="relative"
+        >
+          <motion.img
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
+            src="/mobile-ss.png"
+            alt="App Preview"
+            className="w-[220px] xs:w-[260px] sm:w-[280px] md:w-[300px] lg:w-[370px] drop-shadow-xl"
+          />
+
+          {/* Animated interactive elements */}
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+              rotateY: [0, 2, 0],
+              rotateX: [0, 1, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            }}
+            className="absolute inset-0 z-10"
+          >
+            {/* Screen shine effect */}
+            <motion.div
+              animate={{
+                background: [
+                  "linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
+                  "linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.1) 70%, rgba(255,255,255,0) 100%)",
+                  "linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
+                ],
+                backgroundSize: "200% 200%",
+                backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+              className="absolute inset-[5px] rounded-[18px] z-10"
+            />
+
+            {/* Interactive UI elements */}
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 0.8, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  delay: 2 + i * 1.2,
+                  repeat: Infinity,
+                  repeatDelay: 8,
+                }}
+                className={`absolute w-3 h-3 bg-purple-400 rounded-full z-20 ${
+                  i === 0
+                    ? "top-[20%] left-[20%]"
+                    : i === 1
+                    ? "top-[35%] right-[25%]"
+                    : i === 2
+                    ? "bottom-[35%] left-[30%]"
+                    : i === 3
+                    ? "bottom-[25%] right-[20%]"
+                    : "top-[50%] left-[40%]"
+                }`}
+              />
+            ))}
+          </motion.div>
+
+          {/* Floating feature indicators */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: -60 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="absolute left-0 top-1/4 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center md:left-[-20px] lg:left-0"
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500 mr-2"></span>
+            Live Tracking
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 60 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="absolute right-0 bottom-1/3 bg-white/90 backdrop-blur-sm shadow-lg rounded-full py-2 px-4 text-sm font-medium text-purple-600 flex items-center md:right-[-20px] lg:right-0"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2"></span>
             Real-time Data
@@ -452,47 +660,49 @@ const Hero = () => {
       id="home"
       className="relative min-h-[90vh] flex items-center bg-gradient-to-b from-[#f9faff] to-[#f6f7fd] overflow-hidden"
     >
-      {/* Decorative Lines and Balls */}
-      {/* Hide on mobile, show on md+ */}
-      <div className="absolute inset-0 pointer-events-none select-none z-0 hidden md:block">
-        <motion.img
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          src="/ball-blue.png"
-          alt=""
-          className="absolute bottom-[-10vw] w-[55vw] max-w-[340px] h-auto right-[160px] md:bottom-[30px] md:w-[320px] md:max-w-none z-0"
-          aria-hidden="true"
-        />
-      </div>
+      {/* Decorative elements */}
+      <motion.img
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        src="/ball-blue.png"
+        alt=""
+        className="absolute bottom-[-10vw] w-[55vw] max-w-[340px] h-auto right-[160px] hidden md:block md:bottom-[-5%] md:right-[10%] md:w-[260px] lg:bottom-[30px] lg:w-[320px] lg:right-[160px] lg:max-w-none z-0"
+        aria-hidden="true"
+      />
 
-      {/* Decorative animated elements */}
       <motion.img
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 0.9, x: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         src="/curve-line-up.png"
         alt=""
-        className="absolute left-1/2 top-[30%] w-[100vw] max-w-[1020px] z-10 -translate-x-1/2 pointer-events-none select-none hidden md:block"
+        className="absolute left-1/2 top-[30%] w-[100vw] max-w-[1020px] z-10 -translate-x-1/2 pointer-events-none select-none hidden md:block md:opacity-50 lg:opacity-90"
         aria-hidden="true"
       />
+
       <motion.img
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 0.9, x: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         src="/curve-line-down.png"
         alt=""
-        className="absolute left-1/2 top-[58%] w-[70vw] max-w-[1020px] z-10 -translate-x-1/2 pointer-events-none select-none hidden md:block"
+        className="absolute left-1/2 top-[58%] w-[70vw] max-w-[1020px] z-10 -translate-x-1/2 pointer-events-none select-none hidden md:block md:opacity-50 lg:opacity-90"
         aria-hidden="true"
       />
 
-      {/* Desktop Layout */}
-      <div className="hidden md:block w-full">
+      {/* Desktop Layout - ONLY on lg+ screens */}
+      <div className="hidden lg:block w-full">
         <DesktopHeroView />
       </div>
 
-      {/* Mobile Layout */}
-      <div className="md:hidden w-full">
+      {/* Tablet Layout - ONLY on md-lg screens */}
+      <div className="hidden md:block lg:hidden w-full">
+        <TabletHeroView />
+      </div>
+
+      {/* Mobile Layout - ONLY on xs-sm screens */}
+      <div className="block md:hidden w-full">
         <MobileHeroView />
       </div>
     </section>

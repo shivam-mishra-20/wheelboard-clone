@@ -139,7 +139,8 @@ export default function ContactSection() {
             <div className="overflow-hidden rounded-xl">
               <iframe
                 title="Wheelboard Location"
-                src="https://www.google.com/maps?q=18.559008,73.786972&z=15&output=embed"
+                src="https://www.google.com/maps?q=18.556523053744474,73.79475114500215&z=15&output=embed
+"
                 width="100%"
                 height="250"
                 style={{ border: 0 }}

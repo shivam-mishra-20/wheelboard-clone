@@ -55,7 +55,7 @@ const WhyChoose = () => {
   ];
 
   return (
-    <section id="why-choose" className="py-20 px-4 md:px-10 bg-white">
+    <section id="why-choose" className="mt-10 px-4 md:px-10 bg-white">
       {/* Heading */}
       <div className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">

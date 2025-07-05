@@ -93,7 +93,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="py-20 bg-white min-h-screen font-poppins"
+      className="py-10 bg-white min-h-fit font-poppins"
       style={{
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",

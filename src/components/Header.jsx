@@ -82,12 +82,12 @@ const Header = () => {
     // { id: "contact", label: "Contact" },
   ];
 
-  // Render desktop navigation
+  // Update the renderDesktopNav function to move links upward
   const renderDesktopNav = () => (
     <AnimatePresence>
       {isExpanded && (
         <motion.nav
-          className="hidden md:flex items-center justify-center space-x-10 absolute left-1/2 transform -translate-x-1/2"
+          className="hidden md:flex items-center justify-center space-x-10 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[60%]" // Changed from top-1/2 to move upward
           initial={{ opacity: 1, width: "auto" }}
           exit={{ opacity: 0, width: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -285,10 +285,10 @@ const Header = () => {
     </motion.div>
   );
 
-  // Render desktop logo section
+  // Update the renderDesktopLogo function for tablet optimization
   const renderDesktopLogo = () => (
     <motion.div
-      className="hidden md:flex items-center -ml-10"
+      className="hidden md:flex justify-center items-center -ml-5 md:ml-[-20px] lg:-ml-10"
       whileHover={{ scale: 1.03 }}
       onClick={handleLogoClick}
       style={{ cursor: scrolled ? "pointer" : "default" }}
@@ -300,7 +300,7 @@ const Header = () => {
       <motion.img
         src="/Logo.png"
         alt="Wheelboard Logo"
-        className="w-auto h-24 -my-20"
+        className="w-auto h-20 md:h-16 lg:h-24 -my-16 md:-my-12 lg:-my-20"
         animate={{
           rotate: scrolled && !temporaryExpanded ? 360 : 0,
         }}
@@ -311,7 +311,7 @@ const Header = () => {
         }}
       />
       <motion.h1
-        className={`font-bold text-black ml-0 font-poppins text-2xl ${
+        className={`font-bold text-black ml-0 font-poppins md:text-base lg:text-2xl ${
           scrolled && !temporaryExpanded ? "md:block hidden" : "block"
         }`}
         initial={{ opacity: 0 }}
@@ -321,6 +321,52 @@ const Header = () => {
         Wheelboard
       </motion.h1>
     </motion.div>
+  );
+
+  // Update the renderTabletNav function to center the links vertically
+  const renderTabletNav = () => (
+    <AnimatePresence>
+      {isExpanded && (
+        <motion.nav
+          className="hidden md:flex lg:hidden items-center justify-center space-x-4 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[45%]"
+          initial={{ opacity: 1, width: "auto" }}
+          exit={{ opacity: 0, width: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          {navLinks.map((link) => (
+            <motion.a
+              key={link.id}
+              href={`#${link.id}`}
+              className={`font-medium text-[10px] relative font-poppins tracking-wide group ${
+                activeLink === link.id
+                  ? "text-[#FF6D1B]"
+                  : "text-gray-700 hover:text-[#0052CC]"
+              } transition-colors duration-300`}
+              onClick={() => setActiveLink(link.id)}
+              whileHover={{ y: -1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              {link.label}
+              {/* Active underline */}
+              {activeLink === link.id && (
+                <motion.span
+                  layoutId="tabletActiveIndicator"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FF6D1B] rounded-full"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+              {/* Hover underline */}
+              <span
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#0052CC] rounded-full pointer-events-none transition-all duration-200 scale-x-0 group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </motion.a>
+          ))}
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 
   return (
@@ -337,7 +383,9 @@ const Header = () => {
         maxWidth: isExpanded
           ? "1280px"
           : window.innerWidth >= 768
-          ? "500px"
+          ? window.innerWidth >= 1024
+            ? "500px"
+            : "460px"
           : "1280px",
       }}
       initial={{ y: -100 }}
@@ -345,7 +393,7 @@ const Header = () => {
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
       <div
-        className="bg-[#F4E1F9] rounded-3xl shadow-xl transition-all duration-300 py-3"
+        className="bg-[#F4E1F9] rounded-3xl shadow-xl transition-all duration-300 py-3 md:py-2 lg:py-3"
         style={{
           boxShadow: "0 4px 14px rgba(0, 125, 252, 0.3)",
           fontFamily: "Poppins, sans-serif",
@@ -356,13 +404,16 @@ const Header = () => {
           {renderMobileLogo()}
           {renderDesktopLogo()}
 
-          {/* Desktop Navigation */}
-          {renderDesktopNav()}
+          {/* Desktop Navigation - ONLY for large screens */}
+          <div className="hidden lg:block">{renderDesktopNav()}</div>
+
+          {/* Tablet Navigation - ONLY for medium screens */}
+          <div className="hidden md:block lg:hidden">{renderTabletNav()}</div>
 
           {/* Contact Button (Right Aligned) */}
           <motion.a
             href="#contact"
-            className="hidden md:flex items-center px-6 py-2 rounded-full font-medium transition duration-300"
+            className="hidden md:flex items-center px-6 md:px-3 lg:px-6 py-2 md:py-1.5 lg:py-2 rounded-full font-medium transition duration-300"
             animate={{
               scale: isExpanded ? 1 : 0.9,
             }}
@@ -382,11 +433,11 @@ const Header = () => {
             whileTap={{ scale: 0.98 }}
           >
             <svg
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
-              className="mr-3 text-gray-600"
+              className="mr-2 md:mr-1 lg:mr-3 text-gray-600"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -397,7 +448,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Contact Us</span>
+            <span className="md:text-[10px] lg:text-sm">Contact Us</span>
           </motion.a>
 
           {/* Mobile Navigation */}

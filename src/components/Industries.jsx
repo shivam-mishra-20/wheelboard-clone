@@ -285,8 +285,8 @@ const Industries = () => {
   // Render desktop view
   const renderDesktopView = () => {
     return (
-      <div className="py-10">
-        <div className="text-center mb-12">
+      <div className="mt-0">
+        <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Industries <span className="text-[#0052CC]">we Serve</span>
           </h2>

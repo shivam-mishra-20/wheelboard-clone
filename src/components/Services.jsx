@@ -27,7 +27,7 @@ const highlightStyle = "text-[#FF6D1B] font-semibold";
 const blueStyle = "text-[#0052CC] font-bold";
 
 const Services = () => (
-  <section id="services" className="py-20 md:py-24 bg-white">
+  <section id="services" className="py-10 md:py-10 bg-white">
     <div className="max-w-5xl mx-auto px-4">
       {/* Heading with fade-in animation */}
       <div className="text-center mb-14 animate-fade-in">

@@ -20,7 +20,7 @@ const MissionVisionSection = () => {
   return (
     <section
       id="mission-vision"
-      className="relative bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative bg-white py-10 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Glassy background effect */}
       <div className="absolute inset-0 z-0">
